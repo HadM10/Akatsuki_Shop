@@ -1,7 +1,14 @@
+:root {
+    --gold: #bc9c58;
+
+}
+
 * {
     margin: 0;
     box-sizing: border-box;
     text-decoration: none;
+    font-family: Montserrat;
+    text-transform: uppercase;
 }
 
 @font-face {
@@ -17,6 +24,9 @@
 body {
     font-family: Montserrat;
     letter-spacing: 1px;
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 500px;
 }
 
 header {
@@ -40,7 +50,7 @@ nav div {
     padding: 10px;
 }
 
-nav div img {
+.logo img {
     width: 60%;
     object-fit: contain;
 
@@ -63,19 +73,19 @@ nav ul li a {
 }
 
 nav ul li:not(.submenu):hover>a {
-    background-color: rgb(207, 161, 43);
+    background-color: var(--gold);
     background-size: cover;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-weight: bold;
+    font-weight: bolder;
 
 }
 
 
 
 /* Add this style to position the dropdown and hide the submenu by default */
-.dropdown .submenu {
+.submenu {
     display: none;
     position: absolute;
     background-color: #111;
@@ -87,7 +97,6 @@ nav ul li:not(.submenu):hover>a {
 
 .dropdown {
     position: relative;
-
 }
 
 .submenu li {
@@ -99,6 +108,7 @@ nav ul li:not(.submenu):hover>a {
 .submenu {
     margin: auto;
     width: 100%;
+    border-top: 2px solid var(--gold);
 }
 
 .dropdown .submenu li a {
@@ -122,7 +132,10 @@ nav ul li:not(.submenu):hover>a {
 
 .menu {
     display: flex;
-    align-items: center;
+}
+
+.menu li:not(.submenu li) {
+    padding: 5px;
 }
 
 #menu-toggle {
@@ -141,6 +154,10 @@ nav ul li:not(.submenu):hover>a {
     justify-content: flex-end;
 }
 
+.nav-item {
+    font-size: 20px;
+}
+
 .search-bar {
     display: none;
     align-items: center;
@@ -153,7 +170,7 @@ nav ul li:not(.submenu):hover>a {
     padding: 20px 20px 20px 40px;
     border: none;
     background-color: #111;
-    border-top: 2px solid #a77f40;
+    border-top: 2px solid var(--gold);
     width: 100%;
     font-size: 20px;
     box-shadow: 2px 4px 4px #111;
@@ -194,31 +211,33 @@ nav ul li:not(.submenu):hover>a {
 .slider {
     width: 100%;
     margin: 0 auto;
+    margin-bottom: 50px;
+}
 
+.slide {
+    position: relative;
 }
 
 .slick-slide img {
     width: 100%;
     height: auto;
-    max-height: 100%;
+    max-height: 100vh;
     display: block;
     margin: 0 auto;
-    position: relative;
     aspect-ratio: 16 / 9;
 }
 
 .slick-prev,
 .slick-next {
     position: absolute;
-    background: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0));
+    background-color: #111;
     color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     z-index: 1;
     top: 40%;
-    opacity: 0.5;
-    transition: opacity 1s;
+    transition: background-color 0.3s;
 }
 
 .slick-prev {
@@ -231,8 +250,8 @@ nav ul li:not(.submenu):hover>a {
 
 .slick-prev:hover,
 .slick-next:hover {
-    background: linear-gradient(to right, rgb(207, 161, 43), rgb(223, 160, 2));
-    opacity: 1;
+    background-color: var(--gold);
+
 }
 
 /* Style the navigation dots (pagination) */
@@ -240,13 +259,11 @@ nav ul li:not(.submenu):hover>a {
     list-style: none;
     display: flex;
     justify-content: flex-end;
-    /* Align to the right */
     position: absolute;
     bottom: 20px;
     right: 20px;
-    /* Position on the bottom right */
+    width: 100%;
     z-index: 1;
-    /* Ensure dots are above the slides */
 }
 
 .slick-dots li {
@@ -270,6 +287,336 @@ nav ul li:not(.submenu):hover>a {
     background-color: #333;
     opacity: 1;
     /* Set active dot opacity to 1 */
+}
+
+.slide-content {
+    position: absolute;
+    text-align: center;
+
+    background: rgba(8, 8, 8, 0);
+    width: 100%;
+    height: inherit;
+    color: white;
+    padding: 20px;
+    padding-top: 20%;
+    margin: 0 auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+/* Style for the slide header */
+.slide-content h2 {
+    font-size: 24px;
+    text-shadow: 2px 2px black;
+}
+
+/* Style for the slide descriptive text */
+.slide-content p {
+    font-size: 16px;
+    margin-top: 10px;
+    text-shadow: 2px 2px black;
+}
+
+/* Style for the "Shop Now" button */
+.shop-now-button {
+    display: inline-block;
+    background-color: #ffffff;
+    color: black;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.shop-now-button:hover {
+    background-color: var(--gold);
+    color: white;
+}
+
+/*MAIN CONTENT*/
+
+/* Style for the Now Trending section */
+.featured-products {
+    padding: 20px;
+    text-align: center;
+}
+
+.featured-products h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    letter-spacing: 10px;
+}
+
+.now-trending-products {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Style for individual product cards */
+.product-card {
+    background-color: #fff;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 20px;
+
+}
+
+.product-img {
+    overflow: hidden;
+    position: relative;
+    contain: content;
+    max-width: 100%;
+    height: 500px;
+    margin-bottom: 20px;
+}
+
+.product-card img {
+    max-width: 100%;
+    height: 500px;
+    object-fit: cover;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease;
+}
+
+.product-card img:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.product-card h3 {
+    font-size: 20px;
+    margin: 15px 0;
+}
+
+.product-card p {
+    font-size: 16px;
+    margin: 15px 0;
+}
+
+.product-card .price {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--gold);
+    /* Use your brand color here */
+}
+
+.product-card .buy-button {
+    background-color: var(--gold);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.product-card .buy-button:hover {
+    background-color: #e55e00;
+    /* Change color on hover */
+}
+
+/*Style for the categories section*/
+
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.category {
+    text-align: center;
+    margin-bottom: 20px;
+
+}
+
+.category img {
+    width: 400px;
+    height: 600px;
+    object-fit: cover;
+}
+
+.category h3 {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+
+
+
+/*FOOTER */
+
+footer {
+    background-color: #111;
+    color: #fff;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footer-logo img {
+    width: 60%;
+    object-fit: contain;
+}
+
+.footer-1,
+.footer-2 {
+    display: flex;
+    width: 90%;
+    margin-bottom: 50px;
+}
+
+.footer-1 {
+    border-bottom: 1px solid var(--gold);
+}
+
+
+.subscription {
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+}
+
+.subscription-text {
+    margin-right: 5rem;
+}
+
+.subscription h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.subscription p {
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+/* Style for the email input and subscribe button */
+.subscribe-form {
+    text-align: center;
+}
+
+.subscribe-form input[type="email"] {
+    width: 350px;
+    padding: 20px;
+    border: none;
+    float: left;
+}
+
+.subscribe-form input[type="email"]:focus {
+    outline: none;
+
+}
+
+.subscribe-form button {
+    float: left;
+    background-color: var(--gold);
+    color: #fff;
+    border: none;
+    padding: 20px;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+    filter: brightness(0.9);
+
+}
+
+.subscribe-form button:hover {
+    filter: brightness(1.1);
+}
+
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+.footer-links li {
+    margin-right: 20px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.footer-links li:hover {
+    background-color: var(--gold);
+    background-size: cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bolder;
+}
+
+.footer-social {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.social-icon {
+    font-size: 24px;
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    color: var(--gold);
+    /* Change the color on hover */
+}
+
+.footer-text {
+    text-align: left;
+    margin-top: 20px;
+    width: 90%;
+    margin: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-links ul {
+        flex-direction: column;
+    }
+
+    .footer-links li {
+        margin: 10px 0;
+    }
 }
 
 /* Media query for small screens */
