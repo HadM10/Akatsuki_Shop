@@ -26,5 +26,33 @@ closeBtn.addEventListener('click', function () {
     searchBar.style.display = 'none';
 });
 
+//BLUR CARDS
+
+// Get all offer cards
+const offerCards = document.querySelectorAll('.offer-card');
+
+// Add mouseenter event listener to each offer card
+offerCards.forEach((card, index) => {
+    card.addEventListener('mouseover', () => {
+        // Apply blur to all other offer cards except the one being hovered
+        offerCards.forEach((otherCard, otherIndex) => {
+            if (index !== otherIndex) {
+                otherCard.style.filter = 'blur(3px)';
+                otherCard.style.transition = 'filter 1s';
+            }
+        });
+    });
+
+    // Add mouseleave event listener to remove the blur effect
+    card.addEventListener('mouseleave', () => {
+        // Remove blur from all offer cards
+        offerCards.forEach(otherCard => {
+            otherCard.style.filter = 'none';
+            otherCard.style.transition = 'transform 0.5s';
+        });
+    });
+});
+
+
 
 
