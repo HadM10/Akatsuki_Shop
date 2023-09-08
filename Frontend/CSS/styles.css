@@ -43,8 +43,8 @@ header {
 
 nav {
     display: flex;
-    align-items: center;
     padding: 10px;
+    align-items: center;
 }
 
 nav div {
@@ -52,9 +52,13 @@ nav div {
 }
 
 .logo img {
-    width: 60%;
+    width: 300px;
     object-fit: contain;
+    margin-right: 6vw;
+}
 
+nav ul:not(.submenu) {
+    align-items: center;
 }
 
 nav ul {
@@ -94,22 +98,21 @@ nav ul li:not(.submenu):hover>a {
     padding: 10px;
     top: 100%;
     z-index: 1;
+    text-align: left;
+    margin: auto;
+    width: 100%;
+    border-top: 2px solid var(--gold);
 }
 
 .dropdown {
     position: relative;
+    margin-top: 3.5px;
 }
 
 .submenu li {
     padding: 8px 0;
     font-size: clamp(0.5rem, 5vw, 0.9rem);
 
-}
-
-.submenu {
-    margin: auto;
-    width: 100%;
-    border-top: 2px solid var(--gold);
 }
 
 .dropdown .submenu li a {
@@ -144,8 +147,7 @@ nav ul li:not(.submenu):hover>a {
 }
 
 .icons-container {
-    position: absolute;
-    right: 10vh;
+    margin-left: 15vw;
     z-index: 1;
 }
 
@@ -348,13 +350,17 @@ nav ul li:not(.submenu):hover>a {
 
 .featured-products h2 {
     font-size: 24px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     letter-spacing: 10px;
 }
 
 .now-trending-products {
     display: flex;
+    width: 100%;
     flex-wrap: wrap;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Style for individual product cards */
@@ -362,7 +368,6 @@ nav ul li:not(.submenu):hover>a {
     background-color: #fff;
     border-radius: 5px;
     margin-bottom: 20px;
-    padding: 20px;
 
 }
 
@@ -370,7 +375,7 @@ nav ul li:not(.submenu):hover>a {
     overflow: hidden;
     position: relative;
     contain: content;
-    max-width: 100%;
+    max-width: 400px;
     height: 500px;
     margin-bottom: 20px;
 }
@@ -428,6 +433,7 @@ nav ul li:not(.submenu):hover>a {
     margin-top: 20px;
     flex-wrap: wrap;
     width: 100%;
+    overflow: hidden;
 }
 
 .category {
@@ -481,7 +487,7 @@ nav ul li:not(.submenu):hover>a {
     justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 50px;
 }
 
 .offer-card {
@@ -608,7 +614,8 @@ footer {
 }
 
 .subscription-text {
-    margin-right: 5rem;
+    margin-right: 3rem;
+    max-width: 400px;
 }
 
 .subscription h4 {
@@ -681,7 +688,7 @@ footer {
 
 .footer-social {
     text-align: center;
-    margin: 2rem 0 2rem 5rem;
+    margin: 2rem 0 2rem 3rem;
 }
 
 .social-icon {
