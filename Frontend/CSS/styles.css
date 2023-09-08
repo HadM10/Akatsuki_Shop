@@ -27,17 +27,18 @@ body {
     letter-spacing: 1px;
     position: relative;
     min-height: 100vh;
-    padding-bottom: 400px;
+    padding-bottom: 500px;
 }
 
 header {
     background-color: #111;
     color: #fff;
-    padding: 10px;
+    padding: 45px 20px 40px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: clamp(0.5rem, 5vw, 1rem);
+    font-size: calc(10px + 0.390625vw);
+    position: relative;
 
 }
 
@@ -45,6 +46,7 @@ nav {
     display: flex;
     padding: 10px;
     align-items: center;
+
 }
 
 nav div {
@@ -52,14 +54,25 @@ nav div {
 }
 
 .logo img {
-    width: 300px;
+    width: calc(30% + 12vw);
     object-fit: contain;
-    margin-right: 6vw;
+    padding-bottom: 10px !important;
 }
 
-nav ul:not(.submenu) {
-    align-items: center;
+.logo {
+    position: absolute;
+    z-index: 1;
+
 }
+
+nav ul:not(.submenu, .nav-list) {
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+    left: 35%;
+}
+
+
 
 nav ul {
     list-style: none;
@@ -69,6 +82,7 @@ nav ul {
 nav ul li {
     margin-right: 20px;
     transition: 1s;
+    padding-bottom: 10px !important;
 }
 
 nav ul li a {
@@ -106,16 +120,16 @@ nav ul li:not(.submenu):hover>a {
 
 .dropdown {
     position: relative;
-    margin-top: 3.5px;
+    color: white;
 }
 
 .submenu li {
     padding: 8px 0;
-    font-size: clamp(0.5rem, 5vw, 0.9rem);
+    font-size: calc(10px + 0.390625vw);
 
 }
 
-.dropdown .submenu li a {
+.submenu li a {
     color: white;
     padding-bottom: 10px;
 }
@@ -127,11 +141,17 @@ nav ul li:not(.submenu):hover>a {
 
 }
 
+#products-menu::before {
+    content: "PRODUCTS  \25BC";
+}
+
 /* Responsive menu */
 .menu-icon {
     display: none;
     font-size: 1.5rem;
     cursor: pointer;
+    position: absolute;
+    top: 33%;
 }
 
 .menu {
@@ -146,19 +166,19 @@ nav ul li:not(.submenu):hover>a {
     display: none;
 }
 
-.icons-container {
-    margin-left: 15vw;
-    z-index: 1;
-}
-
 .nav-list {
     list-style: none;
     display: flex;
-    justify-content: flex-end;
+    position: absolute;
+    z-index: 1;
+    right: 5%;
+    align-items: center !important;
+
 }
 
 .nav-item {
-    font-size: 20px;
+    font-size: calc(15px + 0.390625vw);
+
 }
 
 .search-bar {
@@ -175,7 +195,7 @@ nav ul li:not(.submenu):hover>a {
     background-color: #111;
     border-top: 2px solid var(--gold);
     width: 100%;
-    font-size: 20px;
+    font-size: calc(12px + 0.390625vw);
     box-shadow: 2px 4px 4px #111;
     color: white;
     font-family: Montserrat;
@@ -195,7 +215,7 @@ nav ul li:not(.submenu):hover>a {
     cursor: pointer;
     padding: 10px;
     color: #ffffff;
-    font-size: 15px;
+    font-size: calc(15px + 0.390625vw);
 }
 
 .close-btn {
@@ -207,7 +227,7 @@ nav ul li:not(.submenu):hover>a {
     border: none;
     cursor: pointer;
     padding: 10px;
-    font-size: 20px;
+    font-size: calc(15px + 0.390625vw);
     color: white;
 }
 
@@ -295,7 +315,6 @@ nav ul li:not(.submenu):hover>a {
 .slide-content {
     position: absolute;
     text-align: center;
-
     background: rgba(8, 8, 8, 0);
     width: 100%;
     height: inherit;
@@ -311,15 +330,15 @@ nav ul li:not(.submenu):hover>a {
 
 /* Style for the slide header */
 .slide-content h2 {
-    font-size: 24px;
-    text-shadow: 2px 2px black;
+    font-size: calc(18px + 0.50625vw);
+    text-shadow: 1px 1px black;
 }
 
 /* Style for the slide descriptive text */
 .slide-content p {
-    font-size: 16px;
+    font-size: calc(10px + 0.50625vw);
     margin-top: 10px;
-    text-shadow: 2px 2px black;
+    text-shadow: 1px 1px black;
 }
 
 /* Style for the "Shop Now" button */
@@ -333,6 +352,7 @@ nav ul li:not(.submenu):hover>a {
     border-radius: 5px;
     margin-top: 20px;
     transition: background-color 0.5s;
+    font-size: calc(10px + 0.50625vw);
 }
 
 .shop-now-button:hover {
@@ -349,7 +369,7 @@ nav ul li:not(.submenu):hover>a {
 }
 
 .featured-products h2 {
-    font-size: 24px;
+    font-size: calc(18px + 0.390625vw);
     margin-bottom: 30px;
     letter-spacing: 10px;
 }
@@ -394,17 +414,17 @@ nav ul li:not(.submenu):hover>a {
 }
 
 .product-card h3 {
-    font-size: 20px;
+    font-size: calc(15px + 0.390625vw);
     margin: 15px 0;
 }
 
 .product-card p {
-    font-size: 16px;
+    font-size: calc(12px + 0.390625vw);
     margin: 15px 0;
 }
 
 .product-card .price {
-    font-size: 18px;
+    font-size: calc(15px + 0.390625vw);
     font-weight: bold;
     color: var(--gold);
 }
@@ -416,7 +436,7 @@ nav ul li:not(.submenu):hover>a {
     border-radius: 5px;
     padding: 10px 20px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: calc(12px + 0.390625vw);
     margin-top: 10px;
     transition: background-color 0.5s ease;
 }
@@ -459,7 +479,7 @@ nav ul li:not(.submenu):hover>a {
 }
 
 .category h3 {
-    font-size: 22px;
+    font-size: calc(15px + 0.390625vw);
     top: 80%;
     left: 20%;
     position: absolute;
@@ -477,7 +497,7 @@ nav ul li:not(.submenu):hover>a {
 }
 
 .sales-section h2 {
-    font-size: 24px;
+    font-size: calc(18px + 0.390625vw);
     margin: 20px 0 30px 0;
     letter-spacing: 10px;
 }
@@ -514,12 +534,12 @@ nav ul li:not(.submenu):hover>a {
 }
 
 .offer-card h3 {
-    font-size: 18px;
+    font-size: calc(15px + 0.390625vw);
     margin: 10px 0;
 }
 
 .offer-card p {
-    font-size: 14px;
+    font-size: calc(10px + 0.390625vw);
     margin: 10px 0;
 }
 
@@ -538,7 +558,7 @@ nav ul li:not(.submenu):hover>a {
 
 .offer-price,
 .old-price {
-    font-size: 18px;
+    font-size: calc(15px + 0.390625vw);
     color: var(--gold);
     font-weight: bold;
     display: block;
@@ -550,7 +570,7 @@ nav ul li:not(.submenu):hover>a {
     color: #fff;
     border: none;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: calc(12px + 0.390625vw);
     cursor: pointer;
     transition: filter 0.5s ease;
     filter: brightness(90%);
@@ -620,11 +640,11 @@ footer {
 
 .subscription h4 {
     margin-bottom: 10px;
-    font-size: 18px;
+    font-size: calc(12px + 0.50625vw);
 }
 
 .subscription p {
-    font-size: 12px;
+    font-size: calc(6px + 0.50625vw);
     margin-bottom: 20px;
 }
 
@@ -638,6 +658,7 @@ footer {
     padding: 20px;
     border: none;
     float: left;
+    font-size: calc(8px + 0.50625vw);
 }
 
 .subscribe-form input[type="email"]:focus {
@@ -654,6 +675,7 @@ footer {
     cursor: pointer;
     transition: filter 0.5s ease;
     filter: brightness(0.9);
+    font-size: calc(8px + 0.50625vw);
 
 }
 
@@ -670,6 +692,7 @@ footer {
 
 .footer-links li {
     margin-right: 20px;
+    font-size: calc(10px + 0.60625vw);
 }
 
 .footer-links a {
@@ -692,7 +715,7 @@ footer {
 }
 
 .social-icon {
-    font-size: 24px;
+    font-size: calc(18px + 0.390625vw);
     color: #fff;
     margin: 0 10px;
     text-decoration: none;
@@ -725,6 +748,25 @@ footer {
 
 /* Responsive styles for smaller screens */
 @media (max-width: 768px) {
+
+    /*HEADER*/
+
+    .logo {
+        left: 25%;
+    }
+
+    /*BANNER*/
+    .slick-dots li button {
+        width: 20px;
+        height: 20px;
+    }
+
+    .slick-arrow {
+        padding: 10px;
+    }
+
+    /*FOOTER*/
+
     .footer-content {
         flex-direction: column;
         text-align: center;
@@ -737,19 +779,29 @@ footer {
     .footer-links li {
         margin: 10px 0;
     }
-}
 
-/* Media query for small screens */
-@media (max-width: 768px) {
+    .subscribe-form input[type="email"] {
+        padding: 15px;
+        width: 250px;
+    }
+
+    .subscribe-form button {
+        padding: 15px;
+    }
+
+    .footer-social {
+        margin: 0rem 0 2rem 3rem;
+    }
+
+    .footer-2 {
+        margin-bottom: 0px;
+    }
+
+    /* MENU */
+
     .menu {
         display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background-color: #333;
-        text-align: center;
+
     }
 
     .menu-icon {
@@ -758,6 +810,7 @@ footer {
 
     .menu li {
         margin-bottom: 10px;
+        width: 100%;
     }
 
     .menu li:last-child {
@@ -766,5 +819,62 @@ footer {
 
     #menu-toggle:checked~.menu {
         display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 25%;
+        background-color: #111;
+        text-align: left;
+        padding: 20px;
+        z-index: 2;
     }
+
+    .dropdown:hover .submenu {
+        display: none;
+    }
+
+    #products-menu::before {
+        content: "Products";
+    }
+
+    /* NOW TRENDING */
+
+    .product-card img {
+        height: 400px;
+    }
+
+    .product-img {
+        height: 400px;
+    }
+
+    .now-trending-products {
+        gap: 20px;
+    }
+
+    /* CATEGORY */
+
+    .category {
+        width: 50%;
+        margin-bottom: -4px;
+    }
+
+    /* OFFERS */
+
+    .offer-cards {
+        gap: 20px;
+    }
+
+    .offer-card {
+        max-width: 400px;
+    }
+
+    .offer-card img {
+        height: 300px;
+    }
+
+    .sales-section {
+        margin-bottom: 50px;
+    }
+
 }
