@@ -54,8 +54,9 @@ nav div {
 }
 
 .logo img {
-    width: calc(30% + 12vw);
+    width: calc(40% + 10vw);
     object-fit: contain;
+    height: auto;
     padding-bottom: 10px !important;
 }
 
@@ -80,7 +81,7 @@ nav ul {
 }
 
 nav ul li {
-    margin-right: 20px;
+    margin-right: calc(12px + 0.50625vw);;
     transition: 1s;
     padding-bottom: 10px !important;
 }
@@ -151,7 +152,7 @@ nav ul li:not(.submenu):hover>a {
     font-size: 1.5rem;
     cursor: pointer;
     position: absolute;
-    top: 33%;
+    top: 31.5%;
 }
 
 .menu {
@@ -177,7 +178,7 @@ nav ul li:not(.submenu):hover>a {
 }
 
 .nav-item {
-    font-size: calc(15px + 0.390625vw);
+    font-size: calc(12px + 0.50625vw);
 
 }
 
@@ -836,6 +837,122 @@ footer {
 
     #products-menu::before {
         content: "Products";
+    }
+
+    /* NOW TRENDING */
+
+    .product-card img {
+        height: 400px;
+    }
+
+    .product-img {
+        height: 400px;
+    }
+
+    .now-trending-products {
+        gap: 20px;
+    }
+
+    /* CATEGORY */
+
+    .category {
+        width: 50%;
+        margin-bottom: -4px;
+    }
+
+    /* OFFERS */
+
+    .offer-cards {
+        gap: 20px;
+    }
+
+    .offer-card {
+        max-width: 400px;
+    }
+
+    .offer-card img {
+        height: 300px;
+    }
+
+    .sales-section {
+        margin-bottom: 50px;
+    }
+
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 500px) {
+
+    /*HEADER*/
+
+    .logo {
+        left: 22%;
+    }
+
+    /*BANNER*/
+    .slick-dots li button {
+        width: 18px;
+        height: 18px;
+        font-size: 10px;
+    }
+
+    .slick-arrow {
+        padding: 5px;
+        font-size: 10px;
+    }
+
+    .slide-content{
+        top: 35%;
+    }
+
+    .slide-content h2 {
+        font-size: calc(12px + 0.50625vw);
+    }
+    
+    /* Style for the slide descriptive text */
+    .slide-content p {
+        font-size: calc(7px + 0.50625vw);
+    }
+
+    .shop-now-button{
+        padding: 8px 10px;
+        font-size: calc(7px + 0.50625vw);
+    }
+
+    /*FOOTER*/
+
+    .footer-links li {
+        font-size: calc(7px + 0.50625vw);
+    }
+
+    .subscribe-form input[type="email"] {
+        padding: 12px;
+        width: 150px;
+        font-size: calc(7px + 0.50625vw);
+    }
+
+    .subscribe-form button {
+        padding: 12px;
+        font-size: calc(7px + 0.50625vw);
+    }
+
+    .footer-social {
+        margin: 1rem 0 2rem 3rem;
+    }
+
+    .subscription-text{
+        margin-right: 0px;
+    }
+
+    .footer-text {
+        font-size: calc(7px + 0.50625vw);
+    }
+
+    /* MENU */
+
+    #menu-toggle:checked~.menu {
+        top: 90%;
+        font-size: calc(7px + 0.50625vw);
     }
 
     /* NOW TRENDING */
