@@ -81,7 +81,8 @@ nav ul {
 }
 
 nav ul li {
-    margin-right: calc(12px + 0.50625vw);;
+    margin-right: calc(12px + 0.50625vw);
+    ;
     transition: 1s;
     padding-bottom: 10px !important;
 }
@@ -236,6 +237,7 @@ nav ul li:not(.submenu):hover>a {
     width: 100%;
     margin: 0 auto;
     margin-bottom: 50px;
+
 }
 
 .slide {
@@ -316,7 +318,7 @@ nav ul li:not(.submenu):hover>a {
 .slide-content {
     position: absolute;
     text-align: center;
-    background: rgba(8, 8, 8, 0);
+    background: rgba(8, 8, 8, 0.35);
     width: 100%;
     height: inherit;
     color: white;
@@ -370,7 +372,7 @@ nav ul li:not(.submenu):hover>a {
 }
 
 .featured-products h2 {
-    font-size: calc(18px + 0.390625vw);
+    font-size: calc(16px + 0.50625vw);
     margin-bottom: 30px;
     letter-spacing: 10px;
 }
@@ -480,7 +482,7 @@ nav ul li:not(.submenu):hover>a {
 }
 
 .category h3 {
-    font-size: calc(15px + 0.390625vw);
+    font-size: calc(12px + 0.390625vw);
     top: 80%;
     left: 20%;
     position: absolute;
@@ -498,7 +500,7 @@ nav ul li:not(.submenu):hover>a {
 }
 
 .sales-section h2 {
-    font-size: calc(18px + 0.390625vw);
+    font-size: calc(16px + 0.50625vw);
     margin: 20px 0 30px 0;
     letter-spacing: 10px;
 }
@@ -720,6 +722,7 @@ footer {
     color: #fff;
     margin: 0 10px;
     text-decoration: none;
+    transition: color 0.5s ease;
 
 }
 
@@ -745,10 +748,177 @@ footer {
 
 
 
+/* Responsive styles for smaller screens */
+@media (max-width: 500px) {
 
+    /*HEADER*/
+
+    .logo {
+        left: 22%;
+    }
+
+    /*BANNER*/
+    .slick-dots li button {
+        width: 18px;
+        height: 18px;
+        font-size: 10px;
+    }
+
+    .slick-arrow {
+        padding: 5px;
+        font-size: 10px;
+    }
+
+
+    .slide-content h2 {
+        margin-top: -20px;
+    }
+
+    .slide-content h2 {
+        font-size: calc(12px + 0.50625vw);
+    }
+
+    /* Style for the slide descriptive text */
+    .slide-content p {
+        font-size: calc(7px + 0.50625vw);
+        max-width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .shop-now-button {
+        padding: 8px 10px;
+        font-size: calc(7px + 0.50625vw);
+    }
+
+    /*FOOTER*/
+
+    .footer-links li {
+        font-size: calc(7px + 0.50625vw);
+    }
+
+    .subscribe-form {
+        margin: auto;
+    }
+
+    .subscribe-form input[type="email"] {
+        padding: 12px !important;
+        width: 150px !important;
+        font-size: calc(6px + 0.50625vw);
+
+    }
+
+    .subscribe-form button {
+        padding: 12px !important;
+        font-size: calc(6px + 0.50625vw);
+    }
+
+    .footer-social {
+        margin: 1rem auto 2rem auto !important;
+    }
+
+    .subscription-text {
+        margin-right: 0px;
+    }
+
+    .footer-text {
+        font-size: calc(7px + 0.50625vw);
+    }
+
+    /* MENU */
+
+    #menu-toggle:checked~.menu {
+        top: 90%;
+        font-size: calc(7px + 0.50625vw);
+    }
+
+    /* NOW TRENDING */
+
+    .featured-products h2 {
+        font-size: calc(10px + 0.50625vw);
+    }
+
+    .product-card img {
+        height: 200px;
+    }
+
+    .product-img {
+        height: 200px;
+    }
+
+    .now-trending-products {
+        gap: 20px;
+    }
+
+    .product-card h3 {
+        font-size: calc(10px + 0.390625vw);
+    }
+
+    .product-card p {
+        font-size: calc(8px + 0.390625vw);
+    }
+
+    .product-card .price {
+        font-size: calc(10px + 0.390625vw);
+    }
+
+    /* CATEGORY */
+
+    .category img {
+        height: 350px;
+        width: 250px;
+    }
+
+    .category h3 {
+        font-size: calc(8px + 0.390625vw);
+    }
+
+    /* OFFERS */
+
+    .sales-section h2 {
+        font-size: calc(10px + 0.50625vw);
+    }
+
+    .offer-cards {
+        gap: 20px;
+    }
+
+    .offer-card {
+        max-width: 350px;
+
+    }
+
+    .offer-card img {
+        height: 250px;
+    }
+
+    .sales-section {
+        margin-bottom: 0px;
+    }
+
+    .offer-card h3 {
+        font-size: calc(8px + 0.390625vw);
+    }
+
+    .offer-card p {
+        font-size: calc(5px + 0.390625vw);
+    }
+
+    .offer-price,
+    .old-price {
+        font-size: calc(8px + 0.390625vw);
+        margin: 1px 0;
+    }
+
+    .shop-button {
+        padding: 5px 10px;
+        font-size: calc(5px + 0.390625vw);
+    }
+
+}
 
 /* Responsive styles for smaller screens */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 
     /*HEADER*/
 
@@ -880,118 +1050,63 @@ footer {
 
 }
 
-/* Responsive styles for smaller screens */
-@media (max-width: 500px) {
 
-    /*HEADER*/
+
+@media (min-width: 768px) and (max-width: 1000px) {
+
+    .logo img {
+        width: calc(30% + 10vw);
+    }
 
     .logo {
-        left: 22%;
+        left: 1%;
     }
 
-    /*BANNER*/
-    .slick-dots li button {
-        width: 18px;
-        height: 18px;
-        font-size: 10px;
-    }
-
-    .slick-arrow {
-        padding: 5px;
-        font-size: 10px;
-    }
-
-    .slide-content{
-        top: 35%;
-    }
-
-    .slide-content h2 {
-        font-size: calc(12px + 0.50625vw);
-    }
-    
-    /* Style for the slide descriptive text */
-    .slide-content p {
-        font-size: calc(7px + 0.50625vw);
-    }
-
-    .shop-now-button{
-        padding: 8px 10px;
-        font-size: calc(7px + 0.50625vw);
-    }
-
-    /*FOOTER*/
-
-    .footer-links li {
-        font-size: calc(7px + 0.50625vw);
-    }
-
-    .subscribe-form input[type="email"] {
-        padding: 12px;
-        width: 150px;
-        font-size: calc(7px + 0.50625vw);
-    }
-
-    .subscribe-form button {
-        padding: 12px;
-        font-size: calc(7px + 0.50625vw);
-    }
-
-    .footer-social {
-        margin: 1rem 0 2rem 3rem;
-    }
-
-    .subscription-text{
-        margin-right: 0px;
-    }
-
-    .footer-text {
-        font-size: calc(7px + 0.50625vw);
-    }
-
-    /* MENU */
-
-    #menu-toggle:checked~.menu {
-        top: 90%;
-        font-size: calc(7px + 0.50625vw);
-    }
-
-    /* NOW TRENDING */
-
-    .product-card img {
-        height: 400px;
-    }
-
-    .product-img {
-        height: 400px;
-    }
-
-    .now-trending-products {
-        gap: 20px;
+    nav ul:not(.submenu, .nav-list) {
+        left: 28%;
     }
 
     /* CATEGORY */
 
-    .category {
-        width: 50%;
-        margin-bottom: -4px;
+    .category img {
+        height: 500px;
+        width: 350px;
     }
 
-    /* OFFERS */
-
-    .offer-cards {
-        gap: 20px;
+    .category h3 {
+        font-size: calc(10px + 0.390625vw);
     }
 
-    .offer-card {
-        max-width: 400px;
+}
+
+@media (min-width: 1550px) {
+    /* CATEGORY */
+
+    .category img {
+        height: 700px;
+        width: 500px;
     }
 
-    .offer-card img {
-        height: 300px;
+    /*FOOTER*/
+
+
+    .subscribe-form input[type="email"] {
+        width: 400px;
     }
 
-    .sales-section {
-        margin-bottom: 50px;
+    .subscription-text {
+        margin-right: 4vw;
+        max-width: 600px;
+    }
+
+    .footer-social {
+        margin-left: auto;
+        margin-right: 1vw;
+    }
+
+    .footer-links {
+        margin: auto;
+        width: 60%;
     }
 
 }
