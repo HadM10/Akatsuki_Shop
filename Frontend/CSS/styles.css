@@ -63,7 +63,7 @@ nav div {
 .logo {
     position: absolute;
     z-index: 1;
-
+    cursor: pointer;
 }
 
 nav ul:not(.submenu, .nav-list) {
@@ -127,13 +127,12 @@ nav ul li:not(.submenu):hover>a {
 
 .submenu li {
     padding: 8px 0;
-    font-size: calc(10px + 0.390625vw);
-
 }
 
 .submenu li a {
     color: white;
     padding-bottom: 10px;
+    font-size: calc(5px + 0.50625vw);
 }
 
 /* Add this style to show the submenu when hovering over the dropdown */
@@ -1109,4 +1108,158 @@ footer {
         width: 60%;
     }
 
+}
+
+
+/*PRODUCTS PAGE*/
+
+.products {
+    display: flex;
+    width: 70%;
+    flex-wrap: wrap;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    margin-top: 2vw;
+}
+
+.products-card {
+    background-color: #fff;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.products-img {
+    overflow: hidden;
+    position: relative;
+    contain: content;
+    max-width: 250px;
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+.products-card img {
+    max-width: 100%;
+    height: 300px;
+    object-fit: cover;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease;
+}
+
+.products-card img:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.products-card h3 {
+    font-size: calc(6px + 0.50625vw);
+    margin: 5px 0;
+}
+
+.products-card p {
+    font-size: calc(4px + 0.50625vw);
+    margin: calc(4px + 0.50625vw) 0;
+}
+
+.products-card .prices {
+    font-size: calc(6px + 0.50625vw);
+    font-weight: bold;
+    color: var(--gold);
+}
+
+/*FILTERS*/
+
+.filters {
+    background-color: #f4f4f4;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: calc(5px + 0.50625vw);
+}
+
+.filters h3 {
+    font-size: calc(10px + 0.50625vw);
+    margin-bottom: 10px;
+}
+
+.filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: calc(6px + 0.50625vw);
+    justify-content: flex-end;
+}
+
+label {
+    margin-right: 10px;
+}
+
+select {
+    padding: 10px;
+    margin-right: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: calc(6px + 0.50625vw);
+}
+
+
+/*PRODUCT ITEMS AND PAGES*/
+
+.product-count {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    font-size: calc(8px + 0.50625vw);
+    width: 80%;
+    margin: auto;
+}
+
+.product-count p {
+    font-size: 16px;
+    font-size: calc(8px + 0.50625vw);
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+}
+
+.page-arrow {
+    border: none !important;
+    transition: all 0.3s;
+}
+
+.page-link {
+    text-decoration: none;
+    color: #333;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0 5px;
+    transition: all 0.3s;
+}
+
+.page-number {
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin: 0 5px;
+}
+
+.page-link:hover:not(.page-arrow) {
+    background-color: #333;
+    color: #fff;
+}
+
+.page-arrow:hover {
+    transform: scale(1.1);
 }

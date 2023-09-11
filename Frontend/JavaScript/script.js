@@ -1,3 +1,8 @@
+//LOGO LINK
+document.getElementById('logo').addEventListener('click', function () {
+    window.location = 'index.html';
+})
+
 // Get the search icon and search bar elements
 const searchIcon = document.querySelector('.search-icon');
 const searchBar = document.querySelector('.search-bar');
