@@ -360,6 +360,8 @@ nav ul li:not(.submenu):hover>a {
 .shop-now-button:hover {
     background-color: var(--gold);
     color: white;
+    text-shadow: 1px 1px black;
+
 }
 
 /*MAIN CONTENT*/
@@ -1154,17 +1156,17 @@ footer {
 }
 
 .products-card h3 {
-    font-size: calc(6px + 0.50625vw);
+    font-size: calc(7px + 0.50625vw);
     margin: 5px 0;
 }
 
 .products-card p {
-    font-size: calc(4px + 0.50625vw);
-    margin: calc(4px + 0.50625vw) 0;
+    font-size: calc(5px + 0.50625vw);
+    margin: calc(5px + 0.50625vw) 0;
 }
 
 .products-card .prices {
-    font-size: calc(6px + 0.50625vw);
+    font-size: calc(7px + 0.50625vw);
     font-weight: bold;
     color: var(--gold);
 }
@@ -1218,7 +1220,7 @@ select {
     align-items: center;
     padding: 20px;
     font-size: calc(8px + 0.50625vw);
-    width: 80%;
+    width: 90%;
     margin: auto;
 }
 
@@ -1250,7 +1252,8 @@ select {
 .page-number {
     background-color: #333;
     color: #fff;
-    padding: 5px 10px;
+    padding: 5px 11px;
+    border: 1px solid #ccc;
     border-radius: 4px;
     margin: 0 5px;
 }
