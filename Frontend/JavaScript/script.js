@@ -59,5 +59,42 @@ offerCards.forEach((card, index) => {
 });
 
 
+//GET PRODUCTS FROM DATABASE
+
+// ajax get
+
+if (window.location.pathname === '/akatsuki_shop/Frontend/HTML/products.html') {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "../../Backend/php/products.php", true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            displayProducts(response);
+        }
+    };
+    xhr.send();
+
+
+    // display products from database
+
+    function displayProducts(products) {
+        var productContainer = document.getElementById("product-container");
+
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+            var productElement = document.createElement("div");
+            productElement.classList.add("products-card");
+            productElement.innerHTML = `
+            <div class="products-img">
+            <img src="${product.image}" alt="Product ${i}">
+            </div>
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <span class="prices">$${product.price}</span>
+        `;
+            productContainer.appendChild(productElement);
+        }
+    }
+}
 
 
