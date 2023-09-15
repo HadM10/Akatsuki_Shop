@@ -419,17 +419,17 @@ nav ul li:not(.submenu):hover>a {
 }
 
 .product-card h3 {
-    font-size: calc(15px + 0.390625vw);
+    font-size: calc(13px + 0.390625vw);
     margin: 15px 0;
 }
 
 .product-card p {
-    font-size: calc(12px + 0.390625vw);
+    font-size: calc(10px + 0.390625vw);
     margin: 15px 0;
 }
 
 .product-card .price {
-    font-size: calc(15px + 0.390625vw);
+    font-size: calc(13px + 0.390625vw);
     font-weight: bold;
     color: var(--gold);
 }
@@ -539,7 +539,7 @@ nav ul li:not(.submenu):hover>a {
 }
 
 .offer-card h3 {
-    font-size: calc(15px + 0.390625vw);
+    font-size: calc(13px + 0.390625vw);
     margin: 10px 0;
 }
 
@@ -563,7 +563,7 @@ nav ul li:not(.submenu):hover>a {
 
 .offer-price,
 .old-price {
-    font-size: calc(15px + 0.390625vw);
+    font-size: calc(13px + 0.390625vw);
     color: var(--gold);
     font-weight: bold;
     display: block;
@@ -575,7 +575,7 @@ nav ul li:not(.submenu):hover>a {
     color: #fff;
     border: none;
     padding: 10px 20px;
-    font-size: calc(12px + 0.390625vw);
+    font-size: calc(10px + 0.390625vw);
     cursor: pointer;
     transition: filter 0.5s ease;
     filter: brightness(90%);
@@ -645,11 +645,11 @@ footer {
 
 .subscription h4 {
     margin-bottom: 10px;
-    font-size: calc(12px + 0.50625vw);
+    font-size: calc(10px + 0.50625vw);
 }
 
 .subscription p {
-    font-size: calc(6px + 0.50625vw);
+    font-size: calc(5px + 0.50625vw);
     margin-bottom: 20px;
 }
 
@@ -663,7 +663,7 @@ footer {
     padding: 20px;
     border: none;
     float: left;
-    font-size: calc(8px + 0.50625vw);
+    font-size: calc(7px + 0.50625vw);
 }
 
 .subscribe-form input[type="email"]:focus {
@@ -680,7 +680,7 @@ footer {
     cursor: pointer;
     transition: filter 0.5s ease;
     filter: brightness(0.9);
-    font-size: calc(8px + 0.50625vw);
+    font-size: calc(7px + 0.50625vw);
 
 }
 
@@ -697,7 +697,7 @@ footer {
 
 .footer-links li {
     margin-right: 20px;
-    font-size: calc(10px + 0.60625vw);
+    font-size: calc(8px + 0.60625vw);
 }
 
 .footer-links a {
@@ -720,7 +720,7 @@ footer {
 }
 
 .social-icon {
-    font-size: calc(18px + 0.390625vw);
+    font-size: calc(16px + 0.390625vw);
     color: #fff;
     margin: 0 10px;
     text-decoration: none;
@@ -1199,6 +1199,7 @@ footer {
     align-items: center;
     font-size: calc(6px + 0.50625vw);
     justify-content: flex-end;
+    gap: calc(5px + 0.50625vw);
 }
 
 label {
