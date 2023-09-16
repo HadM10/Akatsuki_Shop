@@ -29,10 +29,14 @@
                 <li class="dropdown">
                     <a href="products.html" id="products-menu"></a>
                     <ul class="submenu">
-                        <li><a href="#">CLOTHES</a></li>
-                        <li><a href="#">GAMES</a></li>
-                        <li><a href="#">Accessories</a></li>
-                        <li><a href="#">Books</a></li>
+                        <li><a href="categories.html?category=2" class="category-link"
+                                data-category="shirts">CLOTHES</a></li>
+                        <li><a href="categories.html?category=3" class="category-link" data-category="games">GAMES</a>
+                        </li>
+                        <li><a href="categories.html?category=1" class="category-link"
+                                data-category="accessories">Accessories</a></li>
+                        <li><a href="categories.html?category=4" class="category-link" data-category="books">Books</a>
+                        </li>
                     </ul>
                 </li>
                 <li><a href="#">ABOUT</a></li>
@@ -51,11 +55,11 @@
         </nav>
     </header>
 
-    <div class="search-bar">
+    <form id="search-form" class="search-bar">
         <button id="search-button" class="search-btn" type="submit"><i class="fas fa-search"></i></button>
         <input id="search-input" type="text" placeholder="Search..." name="search">
         <button class="close-btn"><i class="fas fa-times"></i></button>
-    </div>
+    </form>
 
     <div class="slider">
 

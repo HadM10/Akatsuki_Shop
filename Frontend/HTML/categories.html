@@ -61,47 +61,10 @@
         <button class="close-btn"><i class="fas fa-times"></i></button>
     </form>
 
-    <div class="filters">
-        <h3>Filter Products</h3>
-        <div class="filter-options">
-            <label for="category">Category:</label>
-            <select id="category">
-                <option value="all">All Categories</option>
-                <option value="clothing">Clothing</option>
-                <option value="accessories">Accessories</option>
-                <option value="games">Games</option>
-                <!-- Add more category options as needed -->
-            </select>
-
-            <label for="price">Price Range:</label>
-            <select id="price">
-                <option value="all">All Prices</option>
-                <option value="low to high">low to high</option>
-                <option value="high to low">high to low</option>
-                <option value="0-25">$0 - $25</option>
-                <option value="25-50">$25 - $50</option>
-                <option value="50-100">$50 - $100</option>
-                <!-- Add more price options as needed -->
-            </select>
-        </div>
-    </div>
-
     <main>
 
-        <section class="product-count">
-            <p>Showing <span id="item-count">12</span> of <span id="total-items">24</span> items</p>
-            <div class="pagination">
-                <a href="#" class="page-link page-arrow"><i class="fas fa-arrow-left"></i></a>
-                <span class="page-number">1</span>
-                <a href="#" class="page-link">2</a>
-                <a href="#" class="page-link">3</a>
-                <!-- Add more page links as needed -->
-                <a href="#" class="page-link page-arrow"><i class="fas fa-arrow-right"></i></a>
-            </div>
-        </section>
-
         <!-- NOW TRENDING -->
-        <div class="products" id="product-container">
+        <div class="products" id="category-results">
         </div>
 
     </main>

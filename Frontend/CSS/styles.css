@@ -379,6 +379,14 @@ nav ul li:not(.submenu):hover>a {
     letter-spacing: 10px;
 }
 
+#search-container h2 {
+    font-size: calc(10px + 0.50625vw);
+    margin-bottom: 30px;
+    letter-spacing: 5px;
+    padding: 20px;
+    text-align: left;
+}
+
 .now-trending-products {
     display: flex;
     width: 100%;

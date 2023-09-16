@@ -100,17 +100,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // SEARCH AND DISPLAY RESULT FROM DATABASE
 
-    // AJAX Search
-    const searchButton = document.getElementById("search-button");
+    // Check if a search query is present in the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchTerm = urlParams.get('search');
 
-    searchButton.addEventListener("click", function () {
-        const searchTerm = document.getElementById("search-input").value;
+    const searchForm = document.getElementById("search-form");
+    const search_input = document.getElementById("search-input");
 
+    searchForm.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent the form from submitting normally
+
+        const searchTerm = search_input.value.trim();
+        if (searchTerm) {
+            // Redirect to the products page with the search query as a parameter
+            window.location.href = `search.html?search=${encodeURIComponent(searchTerm)}`;
+        }
+    });
+
+    if (searchTerm) {
         // Create a new XMLHttpRequest object
         var xhr = new XMLHttpRequest();
 
         // Define the AJAX request
-        xhr.open("GET", "../../Backend/php/search.php?term=" + searchTerm, true);
+        xhr.open("GET", `../../Backend/php/search.php?term=${searchTerm}`, true);
 
         // Set up the event listener for when the request is complete
         xhr.onreadystatechange = function () {
@@ -126,33 +138,96 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Send the AJAX request
         xhr.send();
-    });
-
+    }
 
     function displaySearchResults(results) {
         // Assuming you have an HTML element where you want to display the results
         var resultsContainer = document.getElementById("search-results");
+        var searchContainer = document.getElementById("search-container");
 
         // Clear any previous results
         resultsContainer.innerHTML = "";
 
-        var productContainer = document.getElementById("product-container");
-        productContainer.style.display = "none";
+        var searchResults = document.createElement("h2");
+        searchResults.innerHTML = `search results for : ${searchTerm}`;
+
+        searchContainer.insertBefore(searchResults, searchContainer.firstChild);
 
         // Loop through the results and create HTML elements to display them
         results.forEach(function (result) {
             var resultElement = document.createElement("div");
             resultElement.classList.add("products-card");
             resultElement.innerHTML = `
-           <div class="products-img">
-           <img src="${result.image}" alt="Product Image">
-           </div>
-           <h3>${result.name}</h3>
-           <p>${result.description}</p>
-           <span class="prices">$${result.price}</span>
-           `;
+       <div class="products-img">
+       <img src="${result.image}" alt="Product Image">
+       </div>
+       <h3>${result.name}</h3>
+       <p>${result.description}</p>
+       <span class="prices">$${result.price}</span>
+       `;
+
+            resultsContainer.appendChild(resultElement);
+        });
+
+    }
+
+
+    // CATEGORIES RESULTS 
+
+    // Check if there's a category parameter in the URL
+    const url_Params = new URLSearchParams(window.location.search);
+    const categoryParam = url_Params.get("category");
+
+    if (categoryParam) {
+
+        console.log("Fetching category: " + categoryParam);
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+
+        // Define the AJAX request to fetch items based on the selected category
+        xhr.open("GET", `../../Backend/php/category.php?category=${categoryParam}`, true);
+
+        // Set up the event listener for when the request is complete
+        xhr.onreadystatechange = function () {
+            console.log("Ready state: " + xhr.readyState + ", Status: " + xhr.status);
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Parse the JSON response from the server
+                var categoryResults = JSON.parse(xhr.responseText);
+
+                // Call a function to display the category results on your webpage
+                displayCategoryResults(categoryResults);
+            }
+        };
+
+        // Send the AJAX request
+        xhr.send();
+    }
+
+    function displayCategoryResults(results) {
+        // Assuming you have an HTML element where you want to display the results
+        var resultsContainer = document.getElementById("category-results");
+
+        // Clear any previous results
+        resultsContainer.innerHTML = "";
+
+        // Loop through the results and create HTML elements to display them
+        results.forEach(function (result) {
+            var resultElement = document.createElement("div");
+            resultElement.classList.add("products-card");
+            resultElement.innerHTML = `
+            <div class="products-img">
+            <img src="${result.image}" alt="Product image">
+            </div>
+            <h3>${result.name}</h3>
+            <p>${result.description}</p>
+            <span class="prices">$${result.price}</span>
+        `;
             resultsContainer.appendChild(resultElement);
         });
     }
 
+
 });
+
+
+
