@@ -74,7 +74,9 @@ nav ul:not(.submenu, .nav-list) {
     left: 35%;
 }
 
-
+a {
+    text-decoration: none;
+}
 
 nav ul {
     list-style: none;
@@ -377,14 +379,6 @@ nav ul li:not(.submenu):hover>a {
     font-size: calc(16px + 0.50625vw);
     margin-bottom: 30px;
     letter-spacing: 10px;
-}
-
-#search-container h2 {
-    font-size: calc(10px + 0.50625vw);
-    margin-bottom: 30px;
-    letter-spacing: 5px;
-    padding: 20px;
-    text-align: left;
 }
 
 .now-trending-products {
@@ -1130,7 +1124,7 @@ footer {
     flex-wrap: wrap;
     gap: 50px;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     text-align: center;
     margin: auto;
     margin-top: 2vw;
@@ -1276,4 +1270,25 @@ select {
 
 .page-arrow:hover {
     transform: scale(1.1);
+}
+
+
+/*SEARCH PAGE*/
+
+#search-container h2 {
+    font-size: calc(10px + 0.50625vw);
+    margin: 30px;
+    letter-spacing: 5px;
+    padding: 20px;
+    text-align: left;
+}
+
+/*CATEGORIES PAGE*/
+
+#categories-container h2 {
+    font-size: calc(15px + 0.50625vw);
+    margin: 30px;
+    letter-spacing: 5px;
+    padding: 20px;
+    text-align: center;
 }

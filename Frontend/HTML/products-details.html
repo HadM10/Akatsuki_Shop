@@ -61,57 +61,11 @@
         <button class="close-btn"><i class="fas fa-times"></i></button>
     </form>
 
-    <div class="filters">
-        <h3>Filter Products</h3>
-        <div class="filter-options">
-            <label for="category-filter">Category:</label>
-            <select id="category-filter">
-                <option value="All Categories">All Categories</option>
-                <option value="Shirts">Shirts</option>
-                <option value="Accessories">Accessories</option>
-                <option value="Games">Games</option>
-                <option value="Books">Books</option>
-                <!-- Add more category options as needed -->
-            </select>
-
-            <label for="price-filter">Price Range:</label>
-            <select id="price-filter">
-                <option value="All Prices">All Prices</option>
-                <option value="low-to-high">Low to High</option>
-                <option value="high-to-low">High to Low</option>
-                <option value="$0 - $25">$0 - $25</option>
-                <option value="$25 - $50">$25 - $50</option>
-                <option value="$50 - $100">$50 - $100</option>
-                <!-- Add more price options as needed -->
-            </select>
-
-            <label for="date-filter">Date:</label>
-            <select id="date-filter">
-                <option value="default">Default</option>
-                <option value="latest">Latest</option>
-                <option value="oldest">Oldest</option>
-                <!-- Add more date options as needed -->
-            </select>
-        </div>
-    </div>
-
-
     <main>
-
-        <section class="product-count">
-            <p>Showing <span id="item-count">12</span> of <span id="total-items">24</span> items</p>
-            <div class="pagination">
-                <a href="#" class="page-link page-arrow"><i class="fas fa-arrow-left"></i></a>
-                <span class="page-number">1</span>
-                <a href="#" class="page-link">2</a>
-                <a href="#" class="page-link">3</a>
-                <!-- Add more page links as needed -->
-                <a href="#" class="page-link page-arrow"><i class="fas fa-arrow-right"></i></a>
+        <!-- SEARCH RESULTS -->
+        <div id="products-details-container">
+            <div class="products" id="products-details-results">
             </div>
-        </section>
-
-        <!-- NOW TRENDING -->
-        <div class="products" id="product-container">
         </div>
 
     </main>
