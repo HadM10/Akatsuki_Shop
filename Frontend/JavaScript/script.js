@@ -271,7 +271,14 @@ document.addEventListener("DOMContentLoaded", function () {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
-                displayProducts(response);
+
+                // Update the product count
+                const itemCount = document.getElementById("item-count");
+                const totalItems = document.getElementById("total-items");
+                itemCount.textContent = response.items.length; // Update with the number of filtered items
+                totalItems.textContent = response.totalItems; // Update with the total number of items
+
+                displayProducts(response.items);
             }
         };
 
@@ -362,44 +369,38 @@ document.addEventListener("DOMContentLoaded", function () {
         // Clear any previous details
         detailsContainer.innerHTML = "";
 
-        // Create elements to display the product details
-        var productElement = document.createElement("div");
-        productElement.classList.add("products-card");
-
-
-        productElement.innerHTML = `
-        <div class="products-img">
+        detailsContainer.innerHTML = `
+        <div class="products-details-img">
             <img src="${productDetails.image}" alt="Product image">
         </div>
-        <h3>${productDetails.name}</h3>
-        <p>${productDetails.description}</p>
-        <p>Price: $${productDetails.price}</p>
-        <p>Stock: ${productDetails.stock}</p>
+        <div id="products-details-info">
+            <h3>${productDetails.name}</h3>
+            <p>${productDetails.description}</p>
+            <p>$${productDetails.price}</p>
+        </div>
     `;
 
-        // Append the product details to the details container
-        detailsContainer.appendChild(productElement);
-
+        var productsInfo = document.getElementById("products-details-info");
         // Depending on the category, you can conditionally render additional details here
         if (productDetails.category_id === "2") {
             // Add code to display size, color options, and quantity input for shirts
             // For example:
             var sizeSelect = document.createElement("select");
-            sizeSelect.innerHTML = `<option value="S">Small</option><option value="M">Medium</option><option value="L">Large</option>`;
+            sizeSelect.innerHTML = `<option value="Size">Select Size</option><option value="S">Small</option><option value="M">Medium</option><option value="L">Large</option>`;
             sizeSelect.id = "size-select";
-            detailsContainer.appendChild(sizeSelect);
+            productsInfo.appendChild(sizeSelect);
 
             var colorSelect = document.createElement("select");
-            colorSelect.innerHTML = `<option value="Black">Black</option><option value="White">White</option>`;
+            colorSelect.innerHTML = `<option value="Color">Select Color</option><option value="Black">Black</option><option value="White">White</option>`;
             colorSelect.id = "color-select";
-            detailsContainer.appendChild(colorSelect);
+            productsInfo.appendChild(colorSelect);
 
             var quantityInput = document.createElement("input");
             quantityInput.type = "number";
             quantityInput.min = "1";
             quantityInput.value = "1";
             quantityInput.id = "quantity-input";
-            detailsContainer.appendChild(quantityInput);
+            productsInfo.appendChild(quantityInput);
 
             var addToCartButton = document.createElement("button");
             addToCartButton.textContent = "Add to Cart";
@@ -412,26 +413,168 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Add the selected product to the cart with details
                 addToCart(productDetails, selectedSize, selectedColor, selectedQuantity);
             });
-            detailsContainer.appendChild(addToCartButton);
+            productsInfo.appendChild(addToCartButton);
         } else if (productDetails.category_id === "1") {
-            // Add code to display simpler details for accessories
-            // For example, just display an "Add to Cart" button
+            // Add code to display quantity input for accessories
+            var quantityInput = document.createElement("input");
+            quantityInput.type = "number";
+            quantityInput.min = "1";
+            quantityInput.value = "1";
+            quantityInput.id = "quantity-input";
+            productsInfo.appendChild(quantityInput);
+
             var addToCartButton = document.createElement("button");
             addToCartButton.textContent = "Add to Cart";
             addToCartButton.addEventListener("click", function () {
-                // Add the selected product to the cart (simpler case for accessories)
-                addToCart(productDetails, null, null, 1);
+                // Get selected quantity
+                var selectedQuantity = document.getElementById("quantity-input").value;
+
+                // Add the selected product to the cart with details (simpler case for accessories)
+                addToCart(productDetails, null, null, selectedQuantity);
             });
-            detailsContainer.appendChild(addToCartButton);
+            productsInfo.appendChild(addToCartButton);
         }
     }
 
 
+    // CART FUNCTIONALITY AND STORING IN COOKIES
 
+    // Function to add an item to the cart
+    function addToCart(productDetails, size, color, quantity) {
+        // Check if a shopping cart exists in cookies, or create an empty one
+        let cart = getCartFromCookies();
 
+        // Create a unique identifier for this cart item (you can use a timestamp, for example)
+        const cartItemId = Date.now().toString();
 
+        // Create a new cart item object
+        const cartItem = {
+            product: {
+                id: productDetails.id,
+                name: productDetails.name,
+                price: productDetails.price
+            },
+            size: size,
+            color: color,
+            quantity: parseInt(quantity)
+        };
 
+        const selectedSize = document.getElementById("size-select").value;
+        const selectedColor = document.getElementById("color-select").value;
+        const selectedQuantity = document.getElementById("quantity-input").value;
 
+        // Ensure that required fields are selected
+        if (selectedSize === "Size" || selectedColor === "Color" || selectedQuantity < 1) {
+            alert("Please select size, color, and quantity.");
+            return;
+        }
+
+        else {
+            cart[cartItemId] = cartItem;
+
+            // Store the updated cart in cookies
+            saveCartToCookies(cart);
+
+            // Optional: Show a confirmation message to the user
+            alert("Item added to cart!");
+
+            console.log(cart);
+            // You can also update the cart display here
+            updateCartDisplay();
+        }
+    }
+
+    // Function to retrieve the cart from cookies
+    function getCartFromCookies() {
+        const cartJSON = getCookie("cart");
+        return cartJSON ? JSON.parse(cartJSON) : {};
+    }
+
+    // Function to save the cart to cookies
+    function saveCartToCookies(cart) {
+        setCookie("cart", JSON.stringify(cart), 30); // Cookie expires in 7 days
+    }
+
+    // Function to get a cookie by name
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
+    }
+
+    // Function to set a cookie
+    function setCookie(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+        const expires = `expires=${date.toUTCString()}`;
+        document.cookie = `${name}=${value};${expires};path=/`;
+    }
+
+    // Function to update the cart display (you can customize this)
+    function updateCartDisplay() {
+        const cart = getCartFromCookies();
+        const cartContainer = document.getElementById("cart-container");
+
+        // Clear any previous cart contents
+        cartContainer.innerHTML = "";
+
+        // Check if the cart is empty
+        if (Object.keys(cart).length === 0) {
+            const emptyCartMessage = document.createElement("p");
+            emptyCartMessage.textContent = "Your cart is empty.";
+            cartContainer.appendChild(emptyCartMessage);
+        } else {
+            // Create a table to display cart items
+            const table = document.createElement("table");
+            table.innerHTML = `
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Size</th>
+                    <th>Color</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        `;
+            const tbody = table.querySelector("tbody");
+
+            // Iterate through cart items using a for...in loop
+            for (const productId in cart) {
+                if (cart.hasOwnProperty(productId)) {
+                    const item = cart[productId];
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                    <td>${item.product.name}</td>
+                    <td>${item.size}</td>
+                    <td>${item.color}</td>
+                    <td>${item.quantity}</td>
+                    <td>$${(item.product.price * item.quantity).toFixed(2)}</td>
+                    <td>
+                        <button class="remove-item" data-product-id="${productId}">Remove</button>
+                    </td>
+                `;
+
+                    tbody.appendChild(row);
+                }
+            }
+
+            cartContainer.appendChild(table);
+
+            // Add event listeners to remove items from the cart
+            const removeButtons = document.querySelectorAll(".remove-item");
+            removeButtons.forEach((button) => {
+                button.addEventListener("click", (event) => {
+                    const productIdToRemove = event.target.getAttribute("data-product-id");
+                    removeItemFromCart(productIdToRemove);
+                    updateCartDisplay(); // Update the cart display
+                });
+            });
+        }
+    }
 
 
 });

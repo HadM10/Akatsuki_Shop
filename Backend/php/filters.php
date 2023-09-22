@@ -1,6 +1,19 @@
 <?php
 include 'connect_db.php';
 
+function getProductCount($conn)
+{
+    $countQuery = "SELECT COUNT(*) AS totalItems FROM products";
+    $result = $conn->query($countQuery);
+
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row['totalItems'];
+    } else {
+        return 0; // Default to 0 if there's an issue with the query
+    }
+}
+
 // Get filter criteria from AJAX request
 $category = isset($_GET['category']) ? $_GET['category'] : 'All Categories';
 $date = isset($_GET['date']) ? $_GET['date'] : 'default';
@@ -64,22 +77,27 @@ $result = $conn->query($query);
 
 if ($result) {
     // Query successful
+    $totalItems = getProductCount($conn); // Get total product count
     if ($result->num_rows > 0) {
         $data = [];
         while ($row = $result->fetch_assoc()) {
             $data[] = $row;
         }
 
+        // Include total product count in the JSON response
+        $response = ['items' => $data, 'totalItems' => $totalItems];
+
         header('Content-Type: application/json');
-        echo json_encode($data);
+        echo json_encode($response);
     } else {
         // No results found for the selected criteria
-        echo json_encode([]);
+        echo json_encode(['items' => [], 'totalItems' => $totalItems]);
     }
 } else {
     // Query failed
     echo json_encode(['error' => mysqli_error($conn)]);
 }
+
 
 $conn->close();
 ?>
