@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Add click event listener to the search icon
     searchIcon.addEventListener('click', () => {
         searchBar.style.display = searchBar.style.display === 'block' ? 'none' : 'block';
+        searchInput.focus();
     });
 
     //Slider
@@ -452,6 +453,7 @@ document.addEventListener("DOMContentLoaded", function () {
             product: {
                 id: productDetails.id,
                 name: productDetails.name,
+                image: productDetails.image,
                 price: productDetails.price
             },
             size: size,
@@ -479,10 +481,10 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Item added to cart!");
 
             console.log(cart);
-            // You can also update the cart display here
-            updateCartDisplay();
+
         }
     }
+
 
     // Function to retrieve the cart from cookies
     function getCartFromCookies() {
@@ -510,13 +512,27 @@ document.addEventListener("DOMContentLoaded", function () {
         document.cookie = `${name}=${value};${expires};path=/`;
     }
 
+    // Function to remove an item from the cart by cart item ID
+    function removeItemFromCart(productIdToRemove) {
+        const cart = getCartFromCookies();
+
+        // Check if the cart item exists
+        if (cart.hasOwnProperty(productIdToRemove)) {
+            delete cart[productIdToRemove];
+            saveCartToCookies(cart);
+            // Clear the cartContainer and then update the display
+            const cartContainer = document.getElementById("cart-container");
+            cartContainer.innerHTML = ""; // Clear the container
+            updateCartDisplay(); // Update the cart display
+        }
+    }
+
+
+
     // Function to update the cart display (you can customize this)
     function updateCartDisplay() {
         const cart = getCartFromCookies();
         const cartContainer = document.getElementById("cart-container");
-
-        // Clear any previous cart contents
-        cartContainer.innerHTML = "";
 
         // Check if the cart is empty
         if (Object.keys(cart).length === 0) {
@@ -524,58 +540,43 @@ document.addEventListener("DOMContentLoaded", function () {
             emptyCartMessage.textContent = "Your cart is empty.";
             cartContainer.appendChild(emptyCartMessage);
         } else {
-            // Create a table to display cart items
-            const table = document.createElement("table");
-            table.innerHTML = `
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Size</th>
-                    <th>Color</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Remove</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        `;
-            const tbody = table.querySelector("tbody");
-
             // Iterate through cart items using a for...in loop
             for (const productId in cart) {
                 if (cart.hasOwnProperty(productId)) {
                     const item = cart[productId];
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
-                    <td>${item.product.name}</td>
-                    <td>${item.size}</td>
-                    <td>${item.color}</td>
-                    <td>${item.quantity}</td>
-                    <td>$${(item.product.price * item.quantity).toFixed(2)}</td>
-                    <td>
+                    const cartItemContainer = document.createElement("div");
+                    cartItemContainer.classList.add("cartItemCard");
+                    cartItemContainer.innerHTML = `
+                    <div class="cart-item-img">
+                        <img src="${item.product.image}" alt="Product image">
+                    </div>
+                    <div id="cart-item-info">
+                        <h3>${item.product.name}</h3>
+                        <p><span class='cart-info-span'>Size:</span> ${item.size}</p>
+                        <p><span class='cart-info-span'>Color:</span> ${item.color}</p>
+                        <p><span class='cart-info-span'>Price:</span> $${(item.product.price * item.quantity).toFixed(2)}</p>
+                        <p><span class='cart-info-span'>Quantity:</span> ${item.quantity}</p>
                         <button class="remove-item" data-product-id="${productId}">Remove</button>
-                    </td>
+                    </div>
                 `;
-
-                    tbody.appendChild(row);
+                    cartContainer.appendChild(cartItemContainer);
                 }
             }
-
-            cartContainer.appendChild(table);
+            console.log(cart);
 
             // Add event listeners to remove items from the cart
-            const removeButtons = document.querySelectorAll(".remove-item");
-            removeButtons.forEach((button) => {
-                button.addEventListener("click", (event) => {
+            document.addEventListener("click", function (event) {
+                if (event.target.classList.contains("remove-item")) {
                     const productIdToRemove = event.target.getAttribute("data-product-id");
                     removeItemFromCart(productIdToRemove);
-                    updateCartDisplay(); // Update the cart display
-                });
+                }
             });
         }
     }
 
+    if (window.location.pathname === '/akatsuki_shop/Frontend/HTML/cart.html') {
+        updateCartDisplay();
+    }
 
 });
 
