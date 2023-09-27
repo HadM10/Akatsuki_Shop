@@ -62,20 +62,51 @@
     </form>
 
     <main>
+        <h1 class="checkout-page-header">Order Checkout</h1>
+        <div class="checkout-page">
+            <form id="checkout-form">
+                <div class="full-name">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input class="input-checkout" type="text" id="first-name" name="first-name" required>
+                    </div>
 
-        <h2 class="yourShoppingCart">Your Shopping Cart</h2>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input class="input-checkout" type="text" id="last-name" name="last-name" required>
+                    </div>
+                </div>
 
-        <!-- NOW TRENDING -->
-        <div id="cart-container">
-            <!-- <div class="products" id="category-results">
-            </div> -->
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input class="input-checkout" id="address" name="address" required></input>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input class="input-checkout" type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone number</label>
+                    <input class="input-checkout" type="tel" id="phone" name="phone" required>
+                </div>
+
+                <!-- You can include an order summary here -->
+
+                <button type="submit">Proceed with Order</button>
+            </form>
+
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                <ul id="order-items">
+                    <!-- Order items will be populated here -->
+                </ul>
+                <div id="total-price-div">
+                    <strong>Total Price:</strong> <span id="total-price"></span>
+                </div>
+            </div>
         </div>
-
-        <div class="checkout">
-            <a href="checkout.html" class="proceed-to-checkout-button">Proceed to Checkout <span
-                    id="checkout-btn"></span></a>
-        </div>
-
 
     </main>
 

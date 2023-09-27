@@ -533,6 +533,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateCartDisplay() {
         const cart = getCartFromCookies();
         const cartContainer = document.getElementById("cart-container");
+        const totalPriceCheckout = document.getElementById("checkout-btn");
+
+        // Initialize total price
+        let totalPrice = 0;
 
         // Check if the cart is empty
         if (Object.keys(cart).length === 0) {
@@ -559,10 +563,16 @@ document.addEventListener("DOMContentLoaded", function () {
                         <button class="remove-item" data-product-id="${productId}">Remove</button>
                     </div>
                 `;
+                    // Update the total price
+                    totalPrice += item.product.price * item.quantity;
+
                     cartContainer.appendChild(cartItemContainer);
                 }
             }
             console.log(cart);
+
+            // Update the total price checkout
+            totalPriceCheckout.textContent = `$${totalPrice.toFixed(2)}`;
 
             // Add event listeners to remove items from the cart
             document.addEventListener("click", function (event) {
@@ -576,6 +586,82 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (window.location.pathname === '/akatsuki_shop/Frontend/HTML/cart.html') {
         updateCartDisplay();
+    }
+
+
+    // Select all input fields
+    const inputs = document.querySelectorAll('.input-checkout');
+
+    // Add focus and blur event listeners to each input
+    inputs.forEach((input) => {
+        input.addEventListener('focus', () => {
+            input.previousElementSibling.style.transform = 'translateY(-8px)';
+            input.previousElementSibling.style.fontSize = 'calc(1px + 0.50625vw)';
+            input.previousElementSibling.style.color = '#333';
+        });
+
+        input.addEventListener('blur', () => {
+            if (!input.value) {
+                input.previousElementSibling.style.transform = 'translateY(0)';
+                input.previousElementSibling.style.fontSize = 'calc(5px + 0.50625vw)';
+                input.previousElementSibling.style.color = '#666';
+            }
+        });
+    });
+
+    // ORDER INFO SUMMARY
+
+    // Function to update the order summary
+    function updateOrderSummary(cart) {
+        const orderItems = document.getElementById('order-items');
+        const totalPrice = document.getElementById('total-price');
+        let total = 0;
+
+
+        // Iterate through cart items using a for...in loop
+        for (const productId in cart) {
+            if (cart.hasOwnProperty(productId)) {
+                const item = cart[productId];
+                const listItem = document.createElement('li');
+                listItem.classList.add('order-list-item');
+
+                // Create an image element
+                const image = document.createElement('img');
+                image.src = item.product.image; // Set the image source
+                image.alt = item.product.name; // Set the image alt text
+                image.classList.add('order-item-image');
+
+                // Create a div for item details
+                const itemDetails = document.createElement('div');
+                itemDetails.classList.add('order-item-details');
+                itemDetails.innerHTML = `
+                <div class='order-name-size'>
+                <p><strong> ${item.product.name}</strong></p>
+                <p>${item.size}</p>
+                </div>
+                <div class='order-item-price'>
+                <p><span> $${(item.product.price * item.quantity).toFixed(2)}</span></p>
+                </div>
+            `;
+
+                listItem.appendChild(image);
+                listItem.appendChild(itemDetails);
+
+                orderItems.appendChild(listItem);
+
+                // Update the total price
+                total += item.product.price * item.quantity;
+            }
+        }
+
+        // Update the total price display
+        totalPrice.textContent = `$${total.toFixed(2)}`;
+    }
+
+    // Call the updateOrderSummary function to populate the order summary initially
+    if (window.location.pathname === '/akatsuki_shop/Frontend/HTML/checkout.html') {
+        const cart = getCartFromCookies();
+        updateOrderSummary(cart);
     }
 
 });
