@@ -1170,6 +1170,10 @@ footer {
     cursor: pointer;
 }
 
+.products-card-info {
+    max-width: 250px;
+}
+
 .products-card h3 {
     font-size: calc(7px + 0.50625vw);
     margin: 5px 0;

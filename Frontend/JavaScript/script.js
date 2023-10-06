@@ -300,9 +300,11 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="products-img">
             <img src="${product.image}" alt="Product image">
             </div>
+            <div class='products-card-info'>
             <h3>${product.name}</h3>
             <p>${product.description}</p>
             <span class="prices">$${product.price}</span>
+            </div>
         `;
             productContainer.appendChild(productElement);
         });
@@ -454,35 +456,44 @@ document.addEventListener("DOMContentLoaded", function () {
                 id: productDetails.id,
                 name: productDetails.name,
                 image: productDetails.image,
-                price: productDetails.price
+                price: productDetails.price,
+                category_id: productDetails.category_id
             },
-            size: size,
-            color: color,
+            size: "",
+            color: "",
             quantity: parseInt(quantity)
         };
 
-        const selectedSize = document.getElementById("size-select").value;
-        const selectedColor = document.getElementById("color-select").value;
-        const selectedQuantity = document.getElementById("quantity-input").value;
-
-        // Ensure that required fields are selected
-        if (selectedSize === "Size" || selectedColor === "Color" || selectedQuantity < 1) {
-            alert("Please select size, color, and quantity.");
-            return;
+        // Check if the product is a shirt and size and color are selected
+        if (productDetails.category_id === "2") {
+            if (size !== "Size" && color !== "Color" && quantity > 0) {
+                cartItem.size = size;
+                cartItem.color = color;
+            } else {
+                alert("Please select size, color and quantity.");
+                return;
+            }
         }
 
         else {
-            cart[cartItemId] = cartItem;
-
-            // Store the updated cart in cookies
-            saveCartToCookies(cart);
-
-            // Optional: Show a confirmation message to the user
-            alert("Item added to cart!");
-
-            console.log(cart);
-
+            if (quantity < 1) {
+                alert("Please select quantity.");
+                return;
+            }
         }
+
+
+        cart[cartItemId] = cartItem;
+
+        // Store the updated cart in cookies
+        saveCartToCookies(cart);
+
+        // Optional: Show a confirmation message to the user
+        alert("Item added to cart!");
+
+        console.log(cart);
+
+
     }
 
 
@@ -512,37 +523,52 @@ document.addEventListener("DOMContentLoaded", function () {
         document.cookie = `${name}=${value};${expires};path=/`;
     }
 
+
+    // Initialize total price
+    let totalPrice = 0;
+
     // Function to remove an item from the cart by cart item ID
     function removeItemFromCart(productIdToRemove) {
         const cart = getCartFromCookies();
 
         // Check if the cart item exists
         if (cart.hasOwnProperty(productIdToRemove)) {
+            const item = cart[productIdToRemove];
+            totalPrice -= item.product.price * item.quantity;
+            console.log(totalPrice);
             delete cart[productIdToRemove];
-            saveCartToCookies(cart);
+            saveCartToCookies(cart); // Save the updated cart to cookies
+
             // Clear the cartContainer and then update the display
             const cartContainer = document.getElementById("cart-container");
             cartContainer.innerHTML = ""; // Clear the container
             updateCartDisplay(); // Update the cart display
+
         }
     }
-
-
 
     // Function to update the cart display (you can customize this)
     function updateCartDisplay() {
         const cart = getCartFromCookies();
         const cartContainer = document.getElementById("cart-container");
         const totalPriceCheckout = document.getElementById("checkout-btn");
+        const checkoutBtn = document.querySelector(".proceed-to-checkout-button");
 
-        // Initialize total price
-        let totalPrice = 0;
+        // Reset total price before recalculating
+        totalPrice = 0;
 
         // Check if the cart is empty
         if (Object.keys(cart).length === 0) {
             const emptyCartMessage = document.createElement("p");
             emptyCartMessage.textContent = "Your cart is empty.";
             cartContainer.appendChild(emptyCartMessage);
+            totalPriceCheckout.textContent = "$0.00";
+
+            checkoutBtn.addEventListener("click", function (event) {
+                event.preventDefault();
+                alert('Please add items in your shopping cart.');
+            });
+
         } else {
             // Iterate through cart items using a for...in loop
             for (const productId in cart) {
@@ -550,7 +576,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     const item = cart[productId];
                     const cartItemContainer = document.createElement("div");
                     cartItemContainer.classList.add("cartItemCard");
-                    cartItemContainer.innerHTML = `
+
+                    let cartItemInfo = ''; // This will hold the common item information
+
+                    if (item.product.category_id === "2") {
+                        // Additional information for shirts
+                        cartItemInfo = `
                     <div class="cart-item-img">
                         <img src="${item.product.image}" alt="Product image">
                     </div>
@@ -563,6 +594,23 @@ document.addEventListener("DOMContentLoaded", function () {
                         <button class="remove-item" data-product-id="${productId}">Remove</button>
                     </div>
                 `;
+                    } else {
+                        // Display only name, quantity, and price for accessories
+                        cartItemInfo = `
+                    <div class="cart-item-img">
+                    <img src="${item.product.image}" alt="Product image">
+                </div>
+                    <div id="cart-item-info">
+                        <h3>${item.product.name}</h3>
+                        <p><span class='cart-info-span'>Price:</span> $${(item.product.price * item.quantity).toFixed(2)}</p>
+                        <p><span class='cart-info-span'>Quantity:</span> ${item.quantity}</p>
+                        <button class="remove-item" data-product-id="${productId}">Remove</button>
+                    </div>
+                `;
+                    }
+
+                    cartItemContainer.innerHTML = cartItemInfo;
+
                     // Update the total price
                     totalPrice += item.product.price * item.quantity;
 
@@ -573,6 +621,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Update the total price checkout
             totalPriceCheckout.textContent = `$${totalPrice.toFixed(2)}`;
+
 
             // Add event listeners to remove items from the cart
             document.addEventListener("click", function (event) {
@@ -663,6 +712,58 @@ document.addEventListener("DOMContentLoaded", function () {
         const cart = getCartFromCookies();
         updateOrderSummary(cart);
     }
+
+
+    // PLACE ORDER 
+    if (window.location.pathname === '/akatsuki_shop/Frontend/HTML/checkout.html') {
+        const checkoutForm = document.getElementById("checkout-form");
+
+        checkoutForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Serialize form data into a URL-encoded string
+            const formData = new URLSearchParams(new FormData(checkoutForm));
+
+            // Create a new XMLHttpRequest object
+            const xhr = new XMLHttpRequest();
+
+            // Configure the request
+            xhr.open("POST", "../../Backend/php/order.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            // Define a callback function to handle the response
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        console.log(xhr.responseText); // Debugging: Log the response text
+
+                        try {
+                            const response = JSON.parse(xhr.responseText);
+
+                            if (response.success) {
+                                // Order placed successfully, show a success message or redirect
+                                alert("Order placed successfully!");
+                                window.location.href = "thank_you.html";
+                                document.cookie = 'cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                            } else {
+                                // Handle any errors returned by the PHP script
+                                alert("Error: " + response.message);
+                            }
+                        } catch (error) {
+                            console.error("Error parsing JSON: " + error);
+                        }
+                    } else {
+                        // Handle HTTP errors here
+                        alert("HTTP error: " + xhr.status);
+                    }
+                }
+            };
+
+            // Send the request with the form data
+            xhr.send(formData);
+        });
+    }
+
 
 });
 
