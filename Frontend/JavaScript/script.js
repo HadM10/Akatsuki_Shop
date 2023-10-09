@@ -60,44 +60,138 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    //GET TRENDING PRODUCTS
 
-    //GET PRODUCTS FROM DATABASE
+    // JavaScript code to fetch and display trending products
+    const trendingProductsContainer = document.querySelector(".now-trending-products");
 
-    // ajax get
+    // Function to fetch trending products via AJAX
+    function fetchTrendingProducts() {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "../../Backend/php/trending_products.php", true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // console.log(xhr.responseText);
+                const response = JSON.parse(xhr.responseText);
+                if (response.error) {
+                    console.error("Error fetching trending products: " + response.error);
+                    return;
+                }
+                displayTrendingProducts(response);
+            }
+        };
+        xhr.send();
+    }
 
-    // if (window.location.pathname === '/akatsuki_shop/Frontend/HTML/products.html') {
-    //     var xhr = new XMLHttpRequest();
-    //     xhr.open("GET", "../../Backend/php/products.php", true);
-    //     xhr.onreadystatechange = function () {
-    //         if (xhr.readyState === 4 && xhr.status === 200) {
-    //             var response = JSON.parse(xhr.responseText);
-    //             displayProducts(response);
-    //         }
-    //     };
-    //     xhr.send();
+    // Function to display trending products on the page
+    function displayTrendingProducts(products) {
+
+        products.forEach((product) => {
+            const productCard = document.createElement("div");
+            productCard.className = "product-card";
+            productCard.classList.add("products-places-cards");
+
+            // Set the data-product-id attribute here
+            productCard.setAttribute("data-product-id", product.id);
+
+            // Create HTML elements for the product details
+            const productImg = document.createElement("div");
+            productImg.className = "product-img";
+            productImg.innerHTML = `<img src="${product.image}" alt="${product.name}">`;
+
+            const productName = document.createElement("h3");
+            productName.textContent = product.name;
+
+            const productDescription = document.createElement("p");
+            productDescription.textContent = product.description;
+
+            const productPrice = document.createElement("span");
+            productPrice.className = "price";
+            productPrice.textContent = `$${product.price}`;
+
+            // Append elements to the product card
+            productCard.appendChild(productImg);
+            productCard.appendChild(productName);
+            productCard.appendChild(productDescription);
+            productCard.appendChild(productPrice);
+
+            // Append the product card to the container
+            trendingProductsContainer.appendChild(productCard);
+        });
+    }
+    if (window.location.pathname === '/akatsuki_shop/Frontend/HTML/index.html') {
+        // Fetch trending products when the page loads
+        fetchTrendingProducts();
+    }
 
 
-    //     // display products from database
+    // THIS WEEK'S OFFERS
 
-    //     function displayProducts(products) {
-    //         var productContainer = document.getElementById("product-container");
+    // JavaScript code to fetch and display offers
+    const offersContainer = document.querySelector(".offer-cards");
 
-    //         for (var i = 0; i < products.length; i++) {
-    //             var product = products[i];
-    //             var productElement = document.createElement("div");
-    //             productElement.classList.add("products-card");
-    //             productElement.innerHTML = `
-    //         <div class="products-img">
-    //         <img src="${product.image}" alt="Product ${i}">
-    //         </div>
-    //         <h3>${product.name}</h3>
-    //         <p>${product.description}</p>
-    //         <span class="prices">$${product.price}</span>
-    //     `;
-    //             productContainer.appendChild(productElement);
-    //         }
-    //     }
-    // }
+    // Function to fetch offers via AJAX
+    function fetchOffers() {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "../../Backend/php/offers.php", true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                if (response.error) {
+                    console.error("Error fetching offers: " + response.error);
+                    return;
+                }
+                displayOffers(response);
+            }
+        };
+        xhr.send();
+    }
+
+    // Function to display offers on the page
+    function displayOffers(offers) {
+
+        offers.forEach((offer) => {
+            const offerCard = document.createElement("div");
+            offerCard.className = "offer-card";
+            offerCard.classList.add("products-places-cards");
+
+            // Set the data-product-id attribute here
+            offerCard.setAttribute("data-product-id", offer.id);
+
+            // Create HTML elements for the offer details
+            const offerProductImg = document.createElement("div");
+            offerProductImg.className = "offer-product-img";
+            offerProductImg.innerHTML = `<img src="${offer.image}" alt="${offer.name}">`;
+
+            const offerName = document.createElement("h3");
+            offerName.textContent = offer.name;
+
+            const offerDescription = document.createElement("p");
+            offerDescription.textContent = offer.description;
+
+            const offerPrices = document.createElement("div");
+            offerPrices.className = "offer-prices";
+            offerPrices.innerHTML = `
+            <span class="old-price">$${offer.old_price}</span>
+            <span class="offer-price">$${offer.price}</span>
+        `;
+
+            // Append elements to the offer card
+            offerCard.appendChild(offerProductImg);
+            offerCard.appendChild(offerName);
+            offerCard.appendChild(offerDescription);
+            offerCard.appendChild(offerPrices);
+
+            // Append the offer card to the container
+            offersContainer.appendChild(offerCard);
+        });
+    }
+
+    if (window.location.pathname === '/akatsuki_shop/Frontend/HTML/index.html') {
+        // Fetch offers when the page loads
+        fetchOffers();
+    }
+
 
     // SEARCH AND DISPLAY RESULT FROM DATABASE
 
@@ -295,6 +389,7 @@ document.addEventListener("DOMContentLoaded", function () {
         products.forEach(function (product) {
             var productElement = document.createElement("div");
             productElement.classList.add("products-card");
+            productElement.classList.add("products-places-cards");
             productElement.setAttribute("data-product-id", product.id);
             productElement.innerHTML = `
             <div class="products-img">
@@ -325,29 +420,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Event listener for when a user clicks on a product
     document.addEventListener("click", function (event) {
-        if (event.target.closest(".products-card")) {
+        if (event.target.closest(".products-places-cards")) {
             // Get the productId of the selected product
-            const productId = event.target.closest(".products-card").getAttribute("data-product-id");
+            const productId = event.target.closest(".products-places-cards").getAttribute("data-product-id");
 
-            window.location.href = `products-details.html?productId=${productId}`;
+            // Determine the category based on the clicked element's class (products, offers, or trending)
+            let productPlace;
+            if (event.target.closest(".now-trending-products")) {
+                productPlace = "now_trending";
+            } else if (event.target.closest(".offer-cards")) {
+                productPlace = "offers";
+            } else {
+                productPlace = "products"; // Default to products if none of the special classes are found
+            }
 
-
+            // Set the category as a URL parameter and navigate to the details page
+            window.location.href = `products-details.html?productId=${productId}&productPlace=${productPlace}`;
         }
     });
 
+
     // Check if there's a category parameter in the URL
-    const details_Params = new URLSearchParams(window.location.search);
-    const detailsParam = details_Params.get("productId");
+    const detailsParams = new URLSearchParams(window.location.search);
+    const detailsParam = detailsParams.get("productId");
+    const productPlace = detailsParams.get("productPlace");
 
-
-    // Function to fetch and display product details based on productId
-
-    if (detailsParam) {
+    // Function to fetch and display product details based on productId and category
+    function fetchAndDisplayProductDetails(productId, productPlace) {
         // Create a new XMLHttpRequest object
         var xhr = new XMLHttpRequest();
 
-        // Define the AJAX request to fetch product details based on productId
-        xhr.open("GET", `../../Backend/php/products-details.php?productId=${detailsParam}`, true);
+        // Define the AJAX request to fetch product details based on productId and category
+        xhr.open("GET", `../../Backend/php/${productPlace}-details.php?productId=${productId}`, true);
 
         // Set up the event listener for when the request is complete
         xhr.onreadystatechange = function () {
@@ -363,6 +467,12 @@ document.addEventListener("DOMContentLoaded", function () {
         // Send the AJAX request
         xhr.send();
     }
+
+    // Fetch and display product details if both productId and category are available
+    if (detailsParam && productPlace) {
+        fetchAndDisplayProductDetails(detailsParam, productPlace);
+    }
+
 
     // Function to display product details on the webpage
     function displayProductDetails(productDetails) {
@@ -417,7 +527,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 addToCart(productDetails, selectedSize, selectedColor, selectedQuantity);
             });
             productsInfo.appendChild(addToCartButton);
-        } else if (productDetails.category_id === "1") {
+        } else {
             // Add code to display quantity input for accessories
             var quantityInput = document.createElement("input");
             quantityInput.type = "number";

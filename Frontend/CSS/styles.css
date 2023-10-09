@@ -413,14 +413,14 @@ nav ul li:not(.submenu):hover>a {
     overflow: hidden;
     position: relative;
     contain: content;
-    max-width: 400px;
-    height: 500px;
+    max-width: 350px;
+    height: 400px;
     margin-bottom: 20px;
 }
 
 .product-card img {
     max-width: 100%;
-    height: 500px;
+    height: 400px;
     object-fit: cover;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
     transition: transform 0.5s ease;
@@ -432,17 +432,17 @@ nav ul li:not(.submenu):hover>a {
 }
 
 .product-card h3 {
-    font-size: calc(13px + 0.390625vw);
-    margin: 15px 0;
-}
-
-.product-card p {
     font-size: calc(10px + 0.390625vw);
     margin: 15px 0;
 }
 
+.product-card p {
+    font-size: calc(6px + 0.390625vw);
+    margin: 15px 0;
+}
+
 .product-card .price {
-    font-size: calc(13px + 0.390625vw);
+    font-size: calc(10px + 0.390625vw);
     font-weight: bold;
     color: var(--gold);
 }
@@ -528,23 +528,31 @@ nav ul li:not(.submenu):hover>a {
     gap: 50px;
 }
 
+
 .offer-card {
     background-color: #fff;
     padding: 20px;
     text-align: center;
     margin-bottom: 20px;
-    max-width: 500px;
+    max-width: 350px;
     transition: transform 0.5s;
 }
 
+.offer-product-img {
+    overflow: hidden;
+    position: relative;
+    contain: content;
+    max-width: 350px;
+    height: 400px;
+    margin-bottom: 20px;
+}
 
 .offer-card img {
     width: 100%;
     height: 400px;
-    object-fit: cover;
+    object-fit: scale-down;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-
 }
 
 .offer-card:hover {
@@ -552,12 +560,12 @@ nav ul li:not(.submenu):hover>a {
 }
 
 .offer-card h3 {
-    font-size: calc(13px + 0.390625vw);
+    font-size: calc(6px + 0.60625vw);
     margin: 10px 0;
 }
 
 .offer-card p {
-    font-size: calc(10px + 0.390625vw);
+    font-size: calc(2px + 0.60625vw);
     margin: 10px 0;
 }
 
@@ -576,11 +584,11 @@ nav ul li:not(.submenu):hover>a {
 
 .offer-price,
 .old-price {
-    font-size: calc(13px + 0.390625vw);
+    font-size: calc(5px + 0.60625vw);
     color: var(--gold);
     font-weight: bold;
     display: block;
-    margin: 10px 0;
+
 }
 
 .shop-button {
@@ -588,7 +596,7 @@ nav ul li:not(.submenu):hover>a {
     color: #fff;
     border: none;
     padding: 10px 20px;
-    font-size: calc(10px + 0.390625vw);
+    font-size: calc(5px + 0.50625vw);
     cursor: pointer;
     transition: filter 0.5s ease;
     filter: brightness(90%);
