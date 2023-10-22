@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
         xhr.open("GET", "../../Backend/php/trending_products.php", true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                // console.log(xhr.responseText);
+                console.log(xhr.responseText);
                 const response = JSON.parse(xhr.responseText);
                 if (response.error) {
                     console.error("Error fetching trending products: " + response.error);
@@ -873,7 +873,6 @@ document.addEventListener("DOMContentLoaded", function () {
             xhr.send(formData);
         });
     }
-
 
 });
 
