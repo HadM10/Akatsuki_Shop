@@ -61,23 +61,33 @@
         <button class="close-btn"><i class="fas fa-times"></i></button>
     </form>
 
-    <main>
+    <div class="contact-page">
+        <h1>Contact Us</h1>
+        <h3>You can request any product you desire and we shall deliver</h3>
+    </div>
 
-        <h2 class="yourShoppingCart">Your Shopping Cart</h2>
+    <!-- Contact Form -->
+    <form id="contactForm">
+        <!-- User Information -->
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
 
-        <!-- NOW TRENDING -->
-        <div id="cart-container">
-            <!-- <div class="products" id="category-results">
-            </div> -->
-        </div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
 
-        <div class="checkout">
-            <a href="checkout.html" class="proceed-to-checkout-button">Proceed to Checkout <span
-                    id="checkout-btn"></span></a>
-        </div>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required>
 
+        <!-- Product Request Information -->
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
 
-    </main>
+        <label for="productImage">Upload Product Image:</label>
+        <input type="file" id="productImage" name="productImage" accept="image/*">
+
+        <!-- Submit Button -->
+        <button type="submit">Submit</button>
+    </form>
 
 
 

@@ -19,7 +19,7 @@ function fetchAndDisplayProducts() {
     xhr.open("GET", "../PHP/admin-products.php", true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log(xhr.responseText);
+            // console.log(xhr.responseText);
             const products = JSON.parse(xhr.responseText);
             displayProducts(products);
         }
@@ -34,6 +34,8 @@ function displayProducts(products) {
     products.forEach((product) => {
         const productItem = document.createElement("div");
         productItem.className = "products-card";
+        productItem.dataset.productId = product.id; // Add data attribute
+
         productItem.innerHTML = `
             <div class="products-img">
                 <img src="../../Frontend/HTML/${product.image}" alt="${product.name}">
@@ -44,13 +46,12 @@ function displayProducts(products) {
             <span class="prices">$${product.price}</span>
             </div>
             <div class = 'products-admin-actions'>
-                <button>Edit</button>
-                <button>Delete</button>
+                <button class="edit-product">Edit</button>
+                <button class="delete-product">Delete</button>
             </div>
         `;
         productList.appendChild(productItem);
     });
-
 }
 
 let subOn = false;
@@ -128,6 +129,111 @@ document.getElementById("product-form").addEventListener("submit", function (eve
     };
     xhr.send(formData);
 });
+
+
+//DELETE PRODUCT
+
+// Add an event listener to handle product deletion
+productList.addEventListener('click', function (event) {
+    if (event.target.textContent === 'Delete') {
+        // Identify the product's ID (you may add it as a data attribute in the HTML)
+        const productId = event.target.closest('.products-card').dataset.productId;
+
+        // Send an AJAX request to delete the product
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '../PHP/delete-product.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    // Product deleted successfully
+                    // Remove the product card from the page
+                    productList.removeChild(event.target.closest('.products-card'));
+                } else {
+                    // Display an error message if deletion fails
+                    console.error('Failed to delete product:', response.error);
+                }
+            }
+        };
+        // Send the request with the product ID
+        xhr.send(`productId=${productId}`);
+    }
+});
+
+
+// EDIT PRODUCT
+
+productList.addEventListener('click', function (event) {
+    const productItem = event.target.closest('.products-card');
+    if (productItem) {
+        const editButton = productItem.querySelector('.edit-product');
+        if (event.target === editButton) {
+            if (!productItem.classList.contains('editing')) {
+                const productName = productItem.querySelector('h3');
+                const productDescription = productItem.querySelector('p');
+                const productPrice = productItem.querySelector('.prices');
+
+                // Make the product information editable
+                productName.contentEditable = true;
+                productDescription.contentEditable = true;
+                productPrice.contentEditable = true;
+
+                // Change the button text to "Save"
+                editButton.textContent = 'Save';
+                productItem.classList.add('editing');
+            } else {
+                // Handle the save action here
+                // Extract product data and send an AJAX request
+                const productId = productItem.dataset.productId;
+                const productName = productItem.querySelector('h3').textContent;
+                const productDescription = productItem.querySelector('p').textContent;
+                const productPrice = productItem.querySelector('.prices').textContent.replace('$', '');
+
+                console.log(productId, productName, productDescription, productPrice);
+
+                // Perform validation if needed
+
+                // Create a FormData object and append data
+                const formData = new FormData();
+                formData.append('productId', productId);
+                formData.append('productName', productName);
+                formData.append('productDescription', productDescription);
+                formData.append('productPrice', productPrice);
+
+                console.log(Array.from(formData.entries()));
+
+                //Send the request with the product ID and updated data
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '../PHP/update-product.php', true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        console.log(xhr.responseText);
+                        const response = JSON.parse(xhr.responseText);
+                        if (response.success) {
+                            // Product updated successfully
+                            // Disable editing and change the button text back to "Edit"
+                            productName.contentEditable = false;
+                            productDescription.contentEditable = false;
+                            productPrice.contentEditable = false;
+                            editButton.textContent = 'Edit';
+                            productItem.classList.remove('editing');
+                        } else {
+                            // Display an error message if the update fails
+                            console.error('Failed to update product:', response.error);
+                        }
+                    }
+                };
+
+                // Send the request with the FormData object
+                xhr.send(formData);
+            }
+        }
+    }
+});
+
+
+
 
 
 

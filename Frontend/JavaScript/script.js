@@ -258,6 +258,7 @@ document.addEventListener("DOMContentLoaded", function () {
             results.forEach(function (result) {
                 var resultElement = document.createElement("div");
                 resultElement.classList.add("products-card");
+                resultElement.classList.add("products-places-cards");
                 resultElement.setAttribute("data-product-id", result.id);
                 resultElement.innerHTML = `
        <div class="products-img">
@@ -332,6 +333,7 @@ document.addEventListener("DOMContentLoaded", function () {
         results.forEach(function (result) {
             var resultElement = document.createElement("div");
             resultElement.classList.add("products-card");
+            resultElement.classList.add("products-places-cards");
             resultElement.setAttribute("data-product-id", result.id);
             resultElement.innerHTML = `
             <div class="products-img">
@@ -873,6 +875,30 @@ document.addEventListener("DOMContentLoaded", function () {
             xhr.send(formData);
         });
     }
+
+    //CONTACT
+
+    document.getElementById("contactForm").addEventListener("submit", function (event) {
+        alert("Thank you for your Message")
+
+        // Get form data
+        const formData = new FormData(event.target);
+
+        // Create and configure the AJAX request
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "../../Backend/php/contact.php", true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Handle the response from the server
+                console.log(xhr.responseText);
+                // You can display a success message to the user or redirect them to a thank you page
+            }
+        };
+
+        // Send the form data to the server
+        xhr.send(formData);
+    });
+
 
 });
 
