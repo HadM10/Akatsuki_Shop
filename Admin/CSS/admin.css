@@ -288,3 +288,95 @@ h1 {
     flex: 1;
     padding: 5px;
 }
+
+/* ORDERS */
+
+.order-card {
+    display: flex;
+    flex-direction: row;
+}
+
+.order-items {
+    width: 80%;
+}
+
+.order-summary {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border: 1px solid #ccc;
+    width: 50%;
+}
+
+.customer-details {
+    width: 30%;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.customer-details p,
+.customer-details h3 {
+    padding: 10px;
+}
+
+.order-summary h2 {
+    font-size: calc(10px + 0.5vw);
+    margin-bottom: 10px;
+}
+
+.order-items {
+    list-style: none;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.order-list-item {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+}
+
+.order-item-image {
+    max-width: 150px;
+    object-fit: cover;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+}
+
+.order-item-details {
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.order-item-price span {
+    color: var(--gold);
+    font-weight: 500;
+}
+
+.order-item-details p {
+    margin: 0;
+    font-size: calc(5px + 0.5vw);
+}
+
+#total-price {
+    margin-top: 10px;
+    font-size: calc(8px + 0.5vw);
+    font-weight: bold;
+    color: var(--gold);
+
+}
+
+#total-price-div {
+    font-size: calc(8px + 0.5vw);
+    float: right;
+}
+
+.order-name-size p {
+    font-size: calc(7px + 0.5vw);
+}

@@ -1,3 +1,26 @@
+<?php
+session_start();
+
+// Check if the session variable is not set (admin is not authenticated)
+if (!isset($_SESSION['admin_username'])) {
+    // Redirect the user back to the login page
+    header("Location: admin-login.php");
+    exit();
+}
+
+// Check the time since the user's last activity
+$inactive = 1800; // 1800 seconds = 30 minutes
+if (isset($_SESSION['timeout'])) {
+    $session_life = time() - $_SESSION['timeout'];
+    if ($session_life > $inactive) {
+        session_destroy(); // Destroy session if inactive for a specific time
+        header("Location: admin-login.php");
+        exit();
+    }
+}
+$_SESSION['timeout'] = time(); // Update session timeout on user activity
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -76,7 +99,9 @@
                         </div>
                     </form>
                 </div>
+                <div id="orders-section">
 
+                </div>
 
             </section>
         </main>

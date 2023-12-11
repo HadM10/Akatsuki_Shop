@@ -6,10 +6,13 @@ const productSection = document.querySelector(".products");
 const viewProducts = document.querySelector(".view-products");
 const addProducts = document.querySelector(".add-products");
 const productForm = document.getElementById("add-product-form");
+const ordersList = document.querySelector(".orders");
+const ordersSection = document.getElementById("orders-section");
 
 function hideAllSections() {
     productList.style.display = "none";
     productForm.style.display = "none";
+    ordersSection.style.display = "none";
     // Add similar lines for other sections
 }
 
@@ -231,6 +234,107 @@ productList.addEventListener('click', function (event) {
         }
     }
 });
+
+// ORDERS
+
+// Function to fetch and display orders
+function fetchAndDisplayOrders() {
+
+
+    // Make an AJAX request to fetch orders from the server
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "../PHP/orders.php", true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+            const orders = JSON.parse(xhr.responseText);
+            displayOrders(orders);
+        }
+    };
+    xhr.send();
+}
+
+// Function to display orders in the admin panel
+function displayOrders(orders) {
+
+    ordersSection.innerHTML = ""; // Clear previous content
+
+    for (const order_id in orders) {
+        if (orders.hasOwnProperty(order_id)) {
+            const order = orders[order_id];
+            const orderCard = document.createElement("div");
+            orderCard.className = "order-card";
+
+            const orderDetails = `
+            <div class='customer-details'>
+                <h3>Order ID: ${order_id}</h3>
+                <p>Customer: ${order.customer_name}</p>
+                <p> Email: ${order.email}</p>
+                <p>Address: ${order.address}</p>
+                <p>Order Date: ${order.order_date}</p>
+                  
+                </div>
+            `;
+            orderCard.innerHTML = orderDetails;
+
+            const orderSummary = document.createElement("div");
+            orderSummary.className = "order-summary";
+            orderSummary.innerHTML = `
+                <h2>Order Summary</h2>
+            `;
+
+            const itemsList = document.createElement("ul");
+            itemsList.className = "order-items";
+
+            order.items.forEach(item => {
+                const listItem = document.createElement("li");
+                listItem.classList.add('order-list-item');
+
+                let detailsHTML = `
+                    <img src="../../Frontend/HTML/${item.image}" alt="${item.name}" class="order-item-image">
+                    <div class="order-item-details">
+                        <h4>${item.name}</h4>
+                        <p>${item.description}</p>
+                        <p>Price: $${item.price}</p>
+                        <p>Quantity: ${item.quantity}</p>
+                `;
+
+                if (item.size !== '') {
+                    detailsHTML += `<p>Size: ${item.size}</p>`;
+                }
+
+                if (item.color !== '') {
+                    detailsHTML += `<p>Color: ${item.color}</p>`;
+                }
+
+                detailsHTML += `</div>`;
+                listItem.innerHTML = detailsHTML;
+
+                itemsList.appendChild(listItem);
+            });
+
+
+            const totalPriceDiv = document.createElement("div");
+            totalPriceDiv.id = 'total-price-div';
+            totalPriceDiv.innerHTML = `<strong>Total Price:</strong> <span id="total-price">$${order.order_total_price}</span>`;
+
+            orderSummary.appendChild(itemsList);
+            orderSummary.appendChild(totalPriceDiv);
+            orderCard.appendChild(orderSummary);
+            ordersSection.appendChild(orderCard);
+        }
+    }
+}
+
+
+
+ordersList.addEventListener('click', function () {
+    // Fetch and display products when the page loads
+    hideAllSections()
+    fetchAndDisplayOrders();
+    ordersSection.style.display = "block";
+});
+
 
 
 

@@ -264,9 +264,11 @@ document.addEventListener("DOMContentLoaded", function () {
        <div class="products-img">
        <img src="${result.image}" alt="Product Image">
        </div>
+       <div class="products-card-info">
        <h3>${result.name}</h3>
        <p>${result.description}</p>
        <span class="prices">$${result.price}</span>
+       </div>
        `;
 
                 resultsContainer.appendChild(resultElement);
