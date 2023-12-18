@@ -32,6 +32,31 @@ body {
     padding-bottom: 500px;
 }
 
+#scrollTopButton {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--gold);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px;
+    filter: brightness(90%);
+    transition: 0.5s;
+    /* Adjust as needed */
+}
+
+#scrollTopButton:hover {
+    filter: brightness(110%);
+}
+
+
 header {
     background-color: #111;
     color: #fff;
@@ -72,7 +97,7 @@ nav ul:not(.submenu, .nav-list) {
     align-items: center;
     position: absolute;
     z-index: 1;
-    left: 35%;
+    left: 32%;
 }
 
 a {
@@ -106,6 +131,166 @@ nav ul li:not(.submenu):hover>a {
     font-weight: bolder;
 
 }
+
+/* PRELOADER */
+
+/* CSS for the preloader */
+.preloader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #111;
+    z-index: 9999;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top: 4px solid var(--gold);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Hide the preloader when content is loaded */
+body.loaded .preloader {
+    display: none;
+}
+
+
+/*LIGHT MODE/DARK MODE SWITCH */
+
+.theme-switch {
+    display: inline-block;
+    height: 34px;
+    margin-top: -10px;
+    margin-right: 20px;
+}
+
+.theme-switch-checkbox {
+    display: none;
+}
+
+.theme-switch-inner {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px;
+    background-color: #ccc;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.switch-circle {
+    background-color: #fff;
+    border-radius: 50%;
+    height: 1px;
+    width: 1px;
+    transition: transform 0.3s ease;
+    transform: translateX(65px);
+    margin: auto;
+}
+
+.switch-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    color: #fff;
+}
+
+.light-mode-label {
+    margin-left: -20px;
+    padding-right: 30px;
+    font-size: calc(5px + 0.50625vw);
+}
+
+.dark-mode-label {
+    padding: 0 10px 0 30px;
+    font-size: calc(5px + 0.50625vw);
+}
+
+/* Dark mode specific styles */
+.theme-switch-checkbox:checked+.theme-switch-inner {
+    background-color: #333;
+}
+
+.theme-switch-checkbox:checked+.theme-switch-inner .switch-circle {
+    transform: translateX(85px);
+}
+
+/* Additional styles for dark mode */
+.dark-mode {
+    background-color: #111;
+    color: #fff;
+}
+
+.dark-mode .product-card,
+.dark-mode .offer-card,
+.dark-mode .products-card {
+    background-color: transparent;
+}
+
+.dark-mode .old-price {
+    color: #fff !important;
+}
+
+.dark-mode .filters {
+    background-color: var(--gold);
+}
+
+.dark-mode .pagination .fas {
+    color: #fff;
+}
+
+.dark-mode #products-details-info,
+.dark-mode #cart-item-info,
+.dark-mode #checkout-form {
+    background-color: rgb(26, 25, 25);
+    border: none;
+}
+
+.dark-mode .order-item-price p span,
+.dark-mode #total-price-div span {
+    color: #fff;
+}
+
+.dark-mode .order-summary {
+    background-color: var(--gold);
+    border: none;
+}
+
+.dark-mode .cart-info-span {
+    color: #fff;
+}
+
+.dark-mode #contactForm {
+    background-color: transparent;
+
+}
+
+.dark-mode #contactForm label {
+    font-weight: lighter;
+}
+
+/* Add more styles for dark mode here */
+
+
+
 
 
 
@@ -1582,6 +1767,19 @@ select {
     filter: brightness(110%);
 }
 
+.arigato {
+    width: 300px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 35%;
+    height: 300px;
+    object-fit: scale-down;
+
+}
+
 /* ORDER SUMMARY */
 
 /* Style for the order summary */
@@ -1614,7 +1812,6 @@ select {
     max-width: 100px;
     object-fit: cover;
     margin-right: 10px;
-    border: 1px solid #ddd;
 }
 
 .order-item-details {
@@ -1649,6 +1846,7 @@ select {
 
 .order-name-size p {
     font-size: calc(7px + 0.5vw);
+    padding: 5px;
 }
 
 /*CONTACT*/

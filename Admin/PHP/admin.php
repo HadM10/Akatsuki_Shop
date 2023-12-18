@@ -44,8 +44,8 @@ $_SESSION['timeout'] = time(); // Update session timeout on user activity
                     </ul>
                     <li class="offers">Offers</li>
                     <li class="now-trending">Now Trending</li>
-                    <li class="orders">Orders</li>
-                    <li class="messages">Messages</li>
+                    <li class="orders">Orders <span id="ordersCount"></span></li>
+                    <li class="messages">Messages <span id="messagesCount"></span></li>
                 </ul>
             </ul>
         </aside>
@@ -100,6 +100,10 @@ $_SESSION['timeout'] = time(); // Update session timeout on user activity
                     </form>
                 </div>
                 <div id="orders-section">
+
+                </div>
+
+                <div id="messages-section">
 
                 </div>
 

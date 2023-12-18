@@ -8,12 +8,14 @@ const addProducts = document.querySelector(".add-products");
 const productForm = document.getElementById("add-product-form");
 const ordersList = document.querySelector(".orders");
 const ordersSection = document.getElementById("orders-section");
+const messagesList = document.querySelector(".messages");
+const messagesSection = document.getElementById('messages-section');
 
 function hideAllSections() {
     productList.style.display = "none";
     productForm.style.display = "none";
     ordersSection.style.display = "none";
-    // Add similar lines for other sections
+    messagesSection.style.display = "none";
 }
 
 function fetchAndDisplayProducts() {
@@ -246,7 +248,6 @@ function fetchAndDisplayOrders() {
     xhr.open("GET", "../PHP/orders.php", true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log(xhr.responseText);
             const orders = JSON.parse(xhr.responseText);
             displayOrders(orders);
         }
@@ -330,10 +331,83 @@ function displayOrders(orders) {
 
 ordersList.addEventListener('click', function () {
     // Fetch and display products when the page loads
-    hideAllSections()
+    hideAllSections();
     fetchAndDisplayOrders();
     ordersSection.style.display = "block";
 });
+
+// MESSAGES
+
+// Function to fetch and display messages
+function fetchAndDisplayMessages() {
+
+    // Make an AJAX request to fetch messages from messages.php
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', '../PHP/messages.php', true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const messages = JSON.parse(xhr.responseText);
+            displayMessages(messages);
+        }
+    };
+    xhr.send();
+}
+
+// Function to display messages
+function displayMessages(messages) {
+    messagesSection.innerHTML = ''; // Clear previous content
+
+    for (const message_id in messages) {
+        if (messages.hasOwnProperty(message_id)) {
+            const message = messages[message_id];
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.innerHTML = `
+            <div class="message-info">
+            <h3>Name: ${message.name}</h3>
+            <p>Email: ${message.email}</p>
+            <p>Phone: ${message.phone}</p>
+            <p>Message: ${message.message}</p>
+            </div>
+            <div class="message-img">
+            ${message.image ? `<img src="../../Frontend/HTML/${message.image}" alt="Message Image">` : ''}
+            </div>
+        `;
+            messagesSection.appendChild(messageDiv);
+        };
+    }
+}
+
+
+// Call fetchAndDisplayMessages function when the DOM content is loaded
+messagesList.addEventListener('click', function () {
+    hideAllSections();
+    fetchAndDisplayMessages();
+    messagesSection.style.display = "block";
+}
+);
+
+// ORDERS AND MESSAGES COUNT 
+
+// Function to update orders and messages count
+function updateCounts() {
+    // Fetch orders count
+    fetch("../PHP/orders-count.php")
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('ordersCount').innerText = `${data.orderCount}`;
+        });
+
+    // Fetch messages count
+    fetch("../PHP/messages-count.php")
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('messagesCount').innerText = `${data.messageCount}`;
+        });
+}
+
+// Call the function to update counts on page load
+updateCounts();
 
 
 

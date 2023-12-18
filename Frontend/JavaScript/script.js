@@ -24,6 +24,90 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    //PRELOADER
+
+    // JavaScript to hide the preloader when content is loaded
+    window.addEventListener('load', function () {
+        setTimeout(function () {
+            document.body.classList.add('loaded'); // Add loaded class to body after 1 second
+        }, 1000); // 1000 milliseconds = 1 second
+    });
+
+    //SCROLL UP BUTTON
+
+    // Get the button element
+    const scrollTopButton = document.getElementById('scrollTopButton');
+
+    // Show the button when scrolling down
+    window.addEventListener('scroll', () => {
+        if (document.documentElement.scrollTop > 300) {
+            scrollTopButton.style.display = 'block';
+        } else {
+            scrollTopButton.style.display = 'none';
+        }
+    });
+
+    // Scroll to the top smoothly when the button is clicked
+    scrollTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Smooth scrolling behavior
+        });
+    });
+
+
+    //LIGHT MODE/DARK MODE SWITCH
+    const darkModeSwitch = document.getElementById('darkModeSwitch');
+    const body = document.body;
+
+    darkModeSwitch.addEventListener('change', () => {
+        if (darkModeSwitch.checked) {
+            enableDarkMode();
+            setModeCookie('dark');
+        } else {
+            disableDarkMode();
+            setModeCookie('light');
+        }
+    });
+
+    function enableDarkMode() {
+        body.classList.add('dark-mode');
+    }
+
+    function disableDarkMode() {
+        body.classList.remove('dark-mode');
+    }
+
+    // Function to set the mode cookie
+    function setModeCookie(mode) {
+        document.cookie = `mode=${mode}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;
+    }
+
+    // Function to get the mode from the cookie
+    function getModeCookie() {
+        const cookieString = document.cookie;
+        const cookies = cookieString.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith('mode=')) {
+                return cookie.substring('mode='.length);
+            }
+        }
+        return '';
+    }
+
+    // Apply the mode immediately without flickering on page load
+    const savedMode = getModeCookie();
+    if (savedMode === 'dark') {
+        enableDarkMode();
+        darkModeSwitch.checked = true;
+    }
+
+
+
+
+
+
     //Close Search Bar
     const searchInput = document.querySelector('.search-bar input');
     const closeBtn = document.querySelector('.close-btn');
@@ -71,7 +155,6 @@ document.addEventListener("DOMContentLoaded", function () {
         xhr.open("GET", "../../Backend/php/trending_products.php", true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                console.log(xhr.responseText);
                 const response = JSON.parse(xhr.responseText);
                 if (response.error) {
                     console.error("Error fetching trending products: " + response.error);
@@ -879,29 +962,30 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     //CONTACT
+    if (window.location.pathname === '/akatsuki_shop/Frontend/HTML/contact.html') {
+        document.getElementById("contactForm").addEventListener("submit", function (event) {
+            alert("Thank you for your Message")
 
-    document.getElementById("contactForm").addEventListener("submit", function (event) {
-        alert("Thank you for your Message")
+            // Get form data
+            const formData = new FormData(event.target);
 
-        // Get form data
-        const formData = new FormData(event.target);
+            // Create and configure the AJAX request
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "../../Backend/php/contact.php", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Handle the response from the server
+                    console.log(xhr.responseText);
+                    // You can display a success message to the user or redirect them to a thank you page
+                }
+            };
 
-        // Create and configure the AJAX request
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "../../Backend/php/contact.php", true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                // Handle the response from the server
-                console.log(xhr.responseText);
-                // You can display a success message to the user or redirect them to a thank you page
-            }
-        };
-
-        // Send the form data to the server
-        xhr.send(formData);
-    });
+            // Send the form data to the server
+            xhr.send(formData);
+        });
 
 
+    }
 });
 
 
