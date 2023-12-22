@@ -1704,7 +1704,8 @@ select {
 .checkout-page {
     display: flex;
     justify-content: center;
-    align-items: stretch;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 #checkout-form {
@@ -1778,6 +1779,55 @@ select {
     height: 300px;
     object-fit: scale-down;
 
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 767px) {
+    #checkout-form {
+
+        width: 85%;
+
+    }
+
+    .order-summary {
+        width: 85% !important;
+    }
+}
+
+@media (min-width: 1251px) and (max-width: 1570px) {
+    #checkout-form {
+
+        width: 40%;
+
+    }
+
+    .order-summary {
+        width: 40% !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 900px) {
+    #checkout-form {
+
+        width: 60%;
+
+    }
+
+    .order-summary {
+        width: 60% !important;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1250px) {
+    #checkout-form {
+
+        width: 51%;
+
+    }
+
+    .order-summary {
+        width: 51% !important;
+    }
 }
 
 /* ORDER SUMMARY */
@@ -1923,4 +1973,15 @@ select {
 
 #contactForm button:hover {
     filter: brightness(100%);
+}
+
+.about-content {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    line-height: 50px;
+    width: 50%;
+    margin: auto;
 }

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/styles.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+
+    <title>Akatsuki Shop</title>
+</head>
+
+<body>
+    <!-- preloader -->
+    <div class="preloader" id="preloader">
+        <img src="../Images/AkatsukiShopLogo.PNG" />
+        <!-- Customize the preloader design here -->
+        <div class="spinner"></div>
+    </div>
+    <header>
+        <nav>
+            <div id="logo" class="logo">
+                <img src="../Images/AkatsukiShopLogo.PNG" alt="Akatsuki Shop">
+            </div>
+
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="menu-icon">&#9776;</label>
+
+            <ul class="menu">
+                <li><a href="index.html">HOME</a></li>
+                <li class="dropdown">
+                    <a href="products.html" id="products-menu"></a>
+                    <ul class="submenu">
+                        <li><a href="categories.html?category=2" class="category-link"
+                                data-category="shirts">CLOTHES</a></li>
+                        <li><a href="categories.html?category=3" class="category-link" data-category="games">GAMES</a>
+                        </li>
+                        <li><a href="categories.html?category=1" class="category-link"
+                                data-category="accessories">Accessories</a></li>
+                        <li><a href="categories.html?category=4" class="category-link" data-category="books">Books</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+
+
+            <ul class="nav-list">
+                <label for="darkModeSwitch" class="theme-switch">
+                    <input type="checkbox" id="darkModeSwitch" class="theme-switch-checkbox">
+                    <div class="theme-switch-inner">
+                        <div class="switch-circle"></div>
+                        <div class="switch-labels">
+                            <span class="light-mode-label">Light</span>
+                            <span class="dark-mode-label">Dark</span>
+                        </div>
+                    </div>
+                </label>
+                <li class="nav-item search-icon"><a href="#"><i class="fas fa-search"></i></a></li>
+                <li class="nav-item profile-icon"><a href="#"><i class="fas fa-user"></i></a></li>
+                <li class="nav-item cart-icon"><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+            </ul>
+
+
+
+        </nav>
+    </header>
+
+    <button id="scrollTopButton" title="Go to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M12 3l9 9h-7v8h-4v-8h-7z" />
+        </svg>
+    </button>
+
+    <form id="search-form" class="search-bar">
+        <button id="search-button" class="search-btn" type="submit"><i class="fas fa-search"></i></button>
+        <input id="search-input" type="text" placeholder="Search..." name="search">
+        <button class="close-btn"><i class="fas fa-times"></i></button>
+    </form>
+
+    <main>
+        <section class="about-section">
+            <div class="about-content">
+                <h1>About Akatsuki Shop</h1>
+                <p>Welcome to Akatsuki Shop! We're a passionate team dedicated to providing a wide range of anime
+                    merchandise, clothes, games, books, and much more.</p>
+                <p>Our mission is to bring the best quality products to all anime enthusiasts. With a focus on customer
+                    satisfaction, we aim to create a delightful shopping experience for every customer.</p>
+                <p>Feel free to explore our diverse collection of products and enjoy shopping at Akatsuki Shop!</p>
+            </div>
+        </section>
+    </main>
+
+
+
+    <footer>
+        <div class="footer-content">
+
+            <div class="footer-1">
+                <div class="subscription">
+                    <div class="subscription-text">
+                        <h4>Subscribe to Our Newsletter</h4>
+                        <p>Stay updated with our latest products and offers.</p>
+                    </div>
+                    <form action="#" method="#" class="subscribe-form">
+                        <input type="email" name="email" placeholder="Enter your email">
+                        <button type="submit">SUBSCRIBE</button>
+                    </form>
+                </div>
+
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <!-- Add more social icons as needed -->
+                </div>
+            </div>
+
+            <div class="footer-2">
+                <div class="footer-logo">
+                    <!-- Your logo or footer branding -->
+                    <img src="../Images/AkatsukiShopLogo.PNG" alt="Footer Logo">
+                </div>
+
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="#">HOME</a></li>
+                        <li><a href="#">PRODUCTS</a></li>
+                        <li><a href="#">ABOUT US</a></li>
+                        <li><a href="#">CONTACT</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer-text">
+            <!-- Footer text or copyright information -->
+            &copy; AKATSUKI SHOP
+        </div>
+    </footer>
+</body>
+<script src="../JavaScript/script.js"></script>
+
+</html>
