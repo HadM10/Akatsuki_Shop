@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="../CSS/admin.css">
 </head>
 
-<!-- <body class="register-body">
+<body class="register-body">
     <div class="register-container">
         <h2>Admin Registration</h2>
         <form action="admin-process-registration.php" method="post">
@@ -19,6 +19,6 @@
             <input type="submit" value="Register">
         </form>
     </div>
-</body> -->
+</body>
 
 </html>
