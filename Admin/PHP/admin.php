@@ -33,7 +33,7 @@ $_SESSION['timeout'] = time(); // Update session timeout on user activity
     <div class="admin-container">
         <aside class="admin-sidebar">
             <h2>Admin Panel</h2>
-            <ul>
+            <ul id="admin-sidebar">
                 <ul>
                     <li class="dashboard">Dashboard</li>
                     <li class="products">Products &#9660;
@@ -46,6 +46,11 @@ $_SESSION['timeout'] = time(); // Update session timeout on user activity
                     <li class="now-trending">Now Trending</li>
                     <li class="orders">Orders <span id="ordersCount"></span></li>
                     <li class="messages">Messages <span id="messagesCount"></span></li>
+                </ul>
+                <ul>
+                    <form class='logout-form' action="admin-logout.php" method="post">
+                        <button class='logout-btn'>Logout</button>
+                    </form>
                 </ul>
             </ul>
         </aside>

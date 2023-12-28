@@ -112,6 +112,13 @@ h1 {
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
 }
 
+#admin-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 85%;
+}
+
 
 /* PRODUCTS SECTION */
 
@@ -488,4 +495,28 @@ h1 {
 .admin-sidebar li:hover>#ordersCount,
 .admin-sidebar li:hover>#messagesCount {
     background-color: #111;
+}
+
+
+/* LOGOUT */
+
+.logout-form {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.logout-btn {
+    background-color: var(--gold);
+    color: white;
+    padding: calc(1px + 0.50625vw) calc(10px + 0.50625vw);
+    transition: filter 0.5s;
+    filter: brightness(95%);
+    font-size: calc(5px + 0.6vw);
+    border: none;
+    text-shadow: 1px 1px #111;
+}
+
+.logout-btn:hover {
+    filter: brightness(110%);
 }

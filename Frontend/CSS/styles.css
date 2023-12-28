@@ -728,7 +728,6 @@ body.loaded .preloader {
     position: relative;
     contain: content;
     max-width: 350px;
-    height: 400px;
     margin-bottom: 20px;
 }
 
@@ -1237,7 +1236,7 @@ select {
     align-items: center;
     margin-top: 5vw;
     flex-direction: column;
-    gap: calc(0.5px + 1vw);
+    gap: calc(10px + 2vw);
 }
 
 #cart-container .cartItemCard {
@@ -1664,7 +1663,7 @@ select {
     /* MENU */
 
     #menu-toggle:checked~.menu {
-        top: 90%;
+
         font-size: calc(7px + 0.50625vw);
     }
 
@@ -1904,7 +1903,7 @@ select {
     }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1235px) {
     .theme-switch {
         position: absolute;
         top: 40px;
@@ -1984,7 +1983,7 @@ select {
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: 100%;
+        top: 90%;
         left: 0;
         width: 25%;
         background-color: #111;
