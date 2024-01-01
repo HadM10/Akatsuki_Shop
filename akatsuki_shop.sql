@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2023 at 10:44 PM
+-- Generation Time: Jan 01, 2024 at 04:42 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -73,18 +73,16 @@ CREATE TABLE `customers` (
   `email` varchar(255) NOT NULL,
   `phone_number` varchar(20) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `country` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `user_id` int(11) DEFAULT NULL
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `phone_number`, `address`, `country`, `created_at`, `user_id`) VALUES
-(1, 'Hadi', 'Makki', 'hadmak20@gmail.com', '03 111 111', 'Nabatieh', NULL, '2023-10-06 17:19:27', NULL),
-(2, 'Hadi', 'Makki', 'had.mak@hotmail.com', '70986272', 'nabatieh', NULL, '2023-10-13 15:07:22', NULL);
+INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `phone_number`, `address`, `created_at`) VALUES
+(1, 'Hadi', 'Makki', 'hadmak20@gmail.com', '03 111 111', 'Nabatieh', '2023-10-06 17:19:27'),
+(2, 'Hadi', 'Makki', 'had.mak@hotmail.com', '70986272', 'nabatieh', '2023-10-13 15:07:22');
 
 -- --------------------------------------------------------
 
@@ -108,7 +106,6 @@ CREATE TABLE `messages` (
 
 INSERT INTO `messages` (`id`, `name`, `email`, `phone`, `message`, `image`, `created_at`) VALUES
 (1, 'eren yeager', 'ERENYEAGER@GMAIL.COM', '1 111 111', 'tatakae', '../../Frontend/Images/shirt1-back.webp', '2023-11-12 15:25:31'),
-(2, 'eren yeager', 'ERENYEAGER@GMAIL.COM', '1 111 111', 'tatakae', '../../Frontend/Images/shirt1-back.webp', '2023-11-12 15:26:53'),
 (3, 'eren yeager', 'ERENYEAGER@GMAIL.COM', '1 111 111', 'shinzou wo sasageyo', '../../Frontend/Images/item3.jpg', '2023-11-12 15:27:23'),
 (4, 'Madara uchiha', 'mugentsukuyomi@gmail.com', '90 90 90 90', 'wake up to reality', NULL, '2023-12-18 15:14:08'),
 (5, 'Madara uchiha', 'mugentsukuyomi@gmail.com', '90 90 90 90', 'with a picture', '../../Frontend/Images/FB_IMG_1667688025155.jpg', '2023-12-18 15:16:25');
@@ -187,12 +184,8 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`id`, `customer_id`, `order_date`, `total_price`) VALUES
 (1, 1, '2023-10-06 17:19:27', 30.00),
 (2, 1, '2023-10-06 17:24:43', 15.00),
-(3, 2, '2023-10-13 15:07:22', 15.00),
-(4, 2, '2023-10-22 15:33:06', 15.00),
-(5, 2, '2023-11-10 15:57:24', 15.00),
-(6, 2, '2023-12-18 16:04:30', 30.00),
-(7, 2, '2023-12-22 18:07:58', 15.00),
-(8, 2, '2023-12-22 19:21:14', 40.00);
+(8, 2, '2023-12-22 19:21:14', 40.00),
+(9, 2, '2023-12-25 18:34:16', 25.00);
 
 -- --------------------------------------------------------
 
@@ -218,14 +211,10 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`, 
 (1, 1, 2, 1, 15.00, 'Black', 'M'),
 (2, 1, 1, 1, 15.00, '', ''),
 (3, 2, 3, 1, 15.00, 'Black', 'M'),
-(4, 3, 3, 1, 15.00, 'Black', 'M'),
-(5, 4, 3, 1, 15.00, 'Black', 'M'),
-(6, 5, 3, 1, 15.00, 'Black', 'M'),
-(7, 6, 3, 1, 15.00, 'Black', 'S'),
-(8, 6, 3, 1, 15.00, 'Black', 'M'),
-(9, 7, 3, 1, 15.00, 'Black', 'S'),
 (10, 8, 5, 1, 25.00, '', ''),
-(11, 8, 3, 1, 15.00, 'Black', 'M');
+(11, 8, 3, 1, 15.00, 'Black', 'M'),
+(12, 9, 6, 1, 10.00, '', ''),
+(13, 9, 2, 1, 15.00, 'Black', 'S');
 
 -- --------------------------------------------------------
 
@@ -254,7 +243,13 @@ INSERT INTO `products` (`id`, `image`, `name`, `description`, `price`, `category
 (3, '../Images/shirt2.jpg', 'NARUTO SHIRT', 'NARUTO UZUMAKI SHIRT', 15.00, 2, '2023-09-14 17:44:36', '2023-09-14 17:44:36'),
 (4, '../Images/backpack1.jpg', 'NARUTO BACKPACK', 'ITACHI UCHIHA BACKPACK', 30.00, 1, '2023-09-14 17:44:37', '2023-09-18 16:44:58'),
 (5, '../../Frontend/Images/accessories-category.webp', 'One Piece Bag', 'SHOULDER ONE PIECE BLACK BAG', 25.00, 1, '2023-10-22 15:26:03', '2023-10-22 15:27:53'),
-(6, '../../Frontend/Images/Uncharted_4.jpg', 'Uncharted 4', 'uncharted 4 ps4 game', 10.00, 3, '2023-10-22 15:30:01', '2023-10-22 15:30:01');
+(6, '../../Frontend/Images/Uncharted_4.jpg', 'Uncharted 4', 'uncharted 4 ps4 game', 10.00, 3, '2023-10-22 15:30:01', '2023-10-22 15:30:01'),
+(12, '../../Frontend/Images/naruto-manga.jpg', 'Naruto Manga', 'naruto manga vol.70', 50.00, 4, '2024-01-01 15:21:00', '2024-01-01 15:21:00'),
+(13, '../../Frontend/Images/one-piece-manga.webp', 'One piece manga', 'ONE PIECE MANGA volume 100', 50.00, 4, '2024-01-01 15:24:00', '2024-01-01 15:24:00'),
+(14, '../../Frontend/Images/aot-manga.webp', 'Attack on titan manga', 'Aot MANGA chapter 13', 25.00, 4, '2024-01-01 15:26:23', '2024-01-01 15:26:23'),
+(15, '../../Frontend/Images/naruto-game.webp', 'NARUTO X BORUTO ULTIMATE NINJA STORM CONNECTIONS', ' PlayStation 5 | PS5', 59.99, 3, '2024-01-01 15:28:52', '2024-01-01 15:34:03'),
+(16, '../../Frontend/Images/fireandice.jpg', 'FIRE AND ICE', 'GAME OF THRONES FIRE AND ICE', 25.00, 4, '2024-01-01 15:33:42', '2024-01-01 15:33:42'),
+(17, '../../Frontend/Images/eren-hoodie.webp', 'Attack On Titan Hoodie', 'EREN YEAGER Hoodie', 25.00, 2, '2024-01-01 15:38:24', '2024-01-01 15:38:24');
 
 --
 -- Indexes for dumped tables
@@ -276,8 +271,7 @@ ALTER TABLE `categories`
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `messages`
@@ -358,29 +352,23 @@ ALTER TABLE `offers`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `customers`
---
-ALTER TABLE `customers`
-  ADD CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `now_trending_products`
